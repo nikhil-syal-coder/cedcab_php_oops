@@ -1,0 +1,59 @@
+input{
+    width: 30%;
+    height: 40px;
+
+}
+.name{
+    margin-left: 50px;
+}
+.user{
+    margin-left: 25px;
+}
+.pass1{
+    margin-left: 25px;
+
+}
+.email{
+    margin-left: 48px;
+}
+.phone{
+    margin-left: 10px;
+}
+.btn{
+    margin-left: 100px; 
+    background-color: rgb(17, 35, 202);
+    color: whitesmoke;
+}
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  table td, table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  table tr:nth-child(even){background-color: #f2f2f2;}
+  
+  table tr:hover {background-color: #ddd;}
+  
+  table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+  }
+ .a,.b,.c{
+margin-left: 10px;
+color:grey;
+ }
+ .b{
+    margin-left: 50px;   
+ }
+ .c{
+    margin-left: 40px;    
+ }
+
