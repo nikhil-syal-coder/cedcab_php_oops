@@ -47,6 +47,7 @@ require_once('config.php');
 <ul>
   <li><a href="admin.php?id=8" id="btn1" class="w3-bar-item w3-button">Location</a><ul>
   <li><a href="admin.php?id=9" id="btn1" class="w3-bar-item w3-button">Location-List</a></li>
+  <li><a href="admin.php?id=15" id="btn1" class="w3-bar-item w3-button">Location-Approve</a></li>
   <li><a href="admin.php?id=10" id="btn1" class="w3-bar-item w3-button">Add Location</a></li></ul>
   </li>
   <li><a href="admin.php?id=11" id="btn1" class="w3-bar-item w3-button">Account</a><ul>
@@ -76,19 +77,49 @@ echo "<center><h2>Welcome "
 if(isset($_GET['id'])){
   $m=$_GET['id'];
   if($m==13||$m==1||$m==2||$m==3||$m==4||$m==5||$m==6||$m==7){
-    $abc='<div class="select">
-    <form action="" method="POST">
-    <center>Your Choice  Our Filter :-<select name="filter" id="filter">
-       <option value="Select Value">Select Value</option>
-       <option value="name">Filter by Name</option>
-       <option value="fare">Filter by Total-fare</option>
-       <option value="date">Filter by Date</option>
-     
-    </select>
-    <input type="submit" value="submit" name="submit" class="submitt">
-    </center>
-    </form>';
-    echo $abc;
+    if($m==1 || $m==2||$m==3){
+      $abc='<div class="select">
+      <form action="" method="POST">
+      <center>Your Choice  Our Filter :-<select name="filter" id="filter">
+         <option value="Select Value">Select Value</option>
+         <option value="name">Filter by Name</option>
+       
+      </select>
+      <input type="submit" value="submit" name="submit" class="submitt">
+      </center>
+      </form>';
+    }
+    else{
+      $abc='<div class="select">
+      <form action="" method="POST">
+      <center>Your Choice  Our Filter :-<select name="filter" id="filter">
+         <option value="Select Value">Select Value</option>
+         <option value="fare">Filter by Total-fare</option>
+         <option value="date">Filter by Date</option>
+       
+      </select>
+      <input type="submit" value="submit" name="submit" class="submitt">
+      </center>
+      </form>';
+    }
+    if($m==13){
+      $abc='<div class="select">
+      <form action="" method="POST">
+      <center>Your Choice  Our Filter :-<select name="filter" id="filter">
+      
+         <option value="Select Value">Select Value</option>
+         <option value="name">Filter by Name</option>
+         <option value="fare">Filter by Total-fare</option>
+         <option value="date">Filter by Date</option>
+       
+      </select>
+      <input type="submit" value="submit" name="submit" class="submitt">
+      </center>
+      </form>';
+    }
+      echo $abc;
+ 
+   
   }
 }
 
@@ -100,13 +131,13 @@ if (isset($_POST['submit'])) {
    $filter=isset($_POST['filter'])?$_POST['filter']:'';
   if($filter==1 || $filter=='fare'|| $filter=='date'){
     $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th></tr><tr>";
-    $ab->filterrr($a,$filter,$obj3->conn);
+    $ab->filterrr($a,$m,$filter,$obj3->conn);
   }
   else{
 
   
   $a='<table><tr><th>User_id</th><th>Name</th><th>Contact</th><th>Date </th><th>username</th></tr><tr>';
-  $ab->filterrr($a,$filter,$obj3->conn);
+  $ab->filterrr($a,$m,$filter,$obj3->conn);
   }
 }
 
@@ -264,11 +295,16 @@ if($m==4||$m==5||$m==6||$m==7){
     $obj4->ride2($a,$m,$obj3->conn);
   }
 }
-if($m==8||$m==9||$m==10){
+if($m==8||$m==9||$m==10||$m==15){
   if($m==8 || $m==9){
-    $a='<table><tr><th>Location-Name</th><th>Location-Distance from Charbagh</th><th>Route-Avaible</th></tr><tr>';
+    $a='<table><tr><th>Location-Name</th><th>Location-Distance from Charbagh</th><th>Route-Avaible</th><th>Approve</th></tr><tr>';
     $obj4->ride3($a,$m,$obj3->conn);
   }
+  if($m==15){
+    $a='<table><tr><th>Location-Name</th><th>Location-Distance from Charbagh</th><th>Route-Avaible</th><th>Approve</th></tr><tr>';
+    $obj4->ride3($a,$m,$obj3->conn);
+  }
+
   if($m==10){
     $a='<form action="" method="POST" class="form11" ><div><label for ="Enter-Location"><h3>Enter-Location</h3></label><input type ="text" id="Enter-Location" class="Enter-Location" name="location"> <label for ="Enter-distance"><h3>Enter-distance</h3></label><input type ="text" name="distance" id="Enter-distance" class="Enter-distance"><br><input type="submit" class="buttnn" name="submit" value="Submit"></div></form>';
     $obj4->ride3($a,$m,$obj3->conn);
@@ -354,6 +390,16 @@ body{
    background-color:rgb(9,121,120);
    color:white;
  }
+ .bb{
+    font-size: large;
+    font-weight: bold;
+    color: darkblue;
+    
+    
+}
+.bbb{
+    color: darkgreen;
+}
 </style>
 
 </body>

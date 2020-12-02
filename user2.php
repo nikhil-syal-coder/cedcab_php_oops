@@ -15,7 +15,10 @@ $obj5=new user();
     <title>Document</title>
     <link rel="stylesheet" href="cab.css">
 </head>
-<body onload="javascript:window.print()">
+<body >
+<a href="user.php?id=2" class="inv" >Back</a>
+ 
+<div>
     <?php 
     if(isset($_GET['id'])){
         $m=$_GET['id'];
@@ -24,7 +27,10 @@ $obj5=new user();
           $obj5->invoice($m,$obj3->conn);
         }
     }
+
     
     ?>
+     </div>
+
 </body>
 </html>

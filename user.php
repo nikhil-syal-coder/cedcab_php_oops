@@ -95,7 +95,7 @@ if (isset($_POST['submit'])) {
   $filter=isset($_POST['filter'])?$_POST['filter']:'';
 
     $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th></tr><tr>";
-    $ab->filterrr($a,$filter,$obj3->conn);
+    $ab->filterrr($a,$m,$filter,$obj3->conn);
 
 
 }
@@ -201,8 +201,8 @@ if($m==4 || $m==5 || $m==6){
     $a='<form action="" method="POST" class="form11">';
     $a.='<center><h2>Update-Details</h2></center>';
     $a.='<div><label for ="user-name">User-Name-</label><input type ="text" id="user-name" class="user-name a" name="username" value="my"></div><br>';
-    $a.='<div><label for ="name">Name-</label><input type ="text" id="name" class="namee b" name="name"></div><br>';
-    $a.='<div></label> <label for ="Phone">Phone-</label><input type ="text" name="phone" id="phone" class="phone c"></div><br>';
+    $a.='<div><label for ="name">Name-</label><input type ="text" id="name" class="namee b" name="name"  onkeydown="return alphaonly(event);"></div><br>';
+    $a.='<div></label> <label for ="Phone">Phone-</label><input type ="text" onkeypress="return onlynumber(event)" name="phone" id="phone"  class="phone c"></div><br>';
     $a.='<div><input type="submit" class="buttnn" name="submit" value="Submit"></div></form>';   
     $obj5->form($a,$m,$obj3->conn);
   }
@@ -240,6 +240,20 @@ function w3_close() {
   document.getElementById("main").style.marginLeft = "0%";
   document.getElementById("mySidebar").style.display = "none";
   document.getElementById("openNav").style.display = "inline-block";
+}
+function alphaonly(button) { 
+	console.log(button.which);
+        var code = button.which;
+        if ((code > 64 && code < 91) || (code < 123 && code > 96)|| (code==08)) 
+            return true; 
+        return false; 
+    } 
+   function onlynumber(button) { 
+
+var code = button.which;
+if (code > 31 && (code < 48 || code > 57)) 
+    return false; 
+return true; 
 }
 
 

@@ -104,7 +104,7 @@ require_once('config.php');
                     $a.='<tr><th>Total-Distance</th><td>'.$row['total_distance'].'</td></tr>';
                     $a.='<tr><th>Total-fare</th><td>'.$row['total_fare'].'</td></tr>';
                     $a.='<tr><th>laugage</th><td>'.$row['laugage'].'</td></tr>';
-                    $a.='<tr><th>Action</th><td><a href="user.php?id=8" class="inv">Print</a></td><td></tr>';
+                    $a.='<tr><th>Action</th><td><a href="#" class="inv" onclick="javascript:window.print()">Print</a></td><td></tr>';
  
                 }
                 $a.='</table>';
@@ -166,7 +166,7 @@ require_once('config.php');
             $result=$conn->query($sql);
 
             if ($result->num_rows > 0) {
-                echo "<center><h2>Welcome-Admin-Ride-Approval Page</h2></center><center>";
+                echo "<center><h2>Welcome<h2><h3>Ride-Approval Page</h3></center><center>";
               
                 while ($row= $result->fetch_assoc()) {
                     $a.='<td>'.$row['ride_id'].'</td>';
@@ -201,7 +201,7 @@ require_once('config.php');
             $result=$conn->query($sql);
 
             if ($result->num_rows > 0) {
-                echo "<center><h2>Welcome-Admin-Ride-Approval Page  </h2></center><center>";
+                echo "<center><h2>Welcome<h2><h3>Ride-Completed-Page</h3></center><center>";
                 while ($row= $result->fetch_assoc()) {
                     $a.='<td>'.$row['ride_id'].'</td>';
                     $a.='<td>'.$row['ride_date'].'</td>';
@@ -238,7 +238,7 @@ if($m==3){
     $result=$conn->query($sql);
 
     if ($result->num_rows > 0) {
-        echo "<center><h2>Welcome-Admin-Ride-Approval Page  </h2></center><center>";
+        echo "<center><h2>Welcome<h2><h3>Ride-Pending-Page</h3></center><center>";
      
         while ($row= $result->fetch_assoc()) {
             $a.='<td>'.$row['ride_id'].'</td>';
@@ -358,7 +358,7 @@ if($m==6){
         $sql="SELECT SUM(total_fare) As Total from ride WHERE customer_id='".$abc."' AND `status`='active'"; 
         $result=$conn->query($sql);
         $row= $result->fetch_assoc();
-         echo '<h2><center>₹</center></h2>'.$row['Total'];
+         echo '<h2><center>₹</center></h2><center>'.$row['Total'];
     }
     function fetch2($conn){
         $name=$_SESSION['userdata']['username'];
@@ -374,7 +374,7 @@ if($m==6){
         $sql="SELECT COUNT(total_fare) As Total from ride WHERE customer_id='".$abc."' AND `status`='active'"; 
         $result=$conn->query($sql);
         $row= $result->fetch_assoc();
-         echo'='. $row['Total'];
+         echo'<center>'. $row['Total'];
     }
     function fetch3($conn){
         $name=$_SESSION['userdata']['username'];
@@ -390,10 +390,10 @@ if($m==6){
         $sql="SELECT COUNT(total_fare) As Total from ride WHERE customer_id='".$abc."' AND `status`='pending'"; 
         $result=$conn->query($sql);
         $row= $result->fetch_assoc();
-         echo '='. $row['Total'];
+         echo '<center>'. $row['Total'];
 }
 
-function filterrr($a,$filter,$conn){
+function filterrr($a,$m,$filter,$conn){
     $abc='';
     $name=$_SESSION['userdata']['username'];
     $sql1="SELECT * FROM users WHERE `username`='".$name."'";
@@ -407,10 +407,34 @@ function filterrr($a,$filter,$conn){
           $abc=$row['user_id'];
         }
     }
-   if($filter==7){
-    $sql="SELECT * FROM ride WHERE `status`='active' AND `customer_id`='".$abc."'
-    ORDER BY total_fare DESC 
-    LIMIT 0, 7";
+   if($filter==7 ){
+       if($m==1){
+        $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."'
+        ORDER BY total_fare DESC 
+        LIMIT 0, 7";   
+       }
+       if($m==2){
+        $sql="SELECT * FROM ride WHERE `status`='active' AND `customer_id`='".$abc."'
+        ORDER BY total_fare DESC 
+        LIMIT 0, 7";
+       }
+       if($m==3){
+        $sql="SELECT * FROM ride WHERE `status`='pending' AND `customer_id`='".$abc."'
+        ORDER BY total_fare DESC 
+        LIMIT 0, 7";
+       }
+       if($m==8){
+        $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."'
+        ORDER BY total_fare DESC 
+        LIMIT 0, 7";   
+       }
+    //    if($m==13){
+    //     $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."'
+    //     ORDER BY total_fare DESC 
+    //     LIMIT 0, 7";
+    //    }
+   
+   
     $result=$conn->query($sql);
     if ($result->num_rows > 0) {
        
@@ -428,9 +452,27 @@ function filterrr($a,$filter,$conn){
     }
    }
    if($filter==30){
-    $sql="SELECT * FROM ride WHERE `status`='active' AND `customer_id`='".$abc."'
-    ORDER BY ride_date DESC 
-    LIMIT 0, 30";
+    if($m==1){
+        $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."'
+        ORDER BY total_fare DESC 
+        LIMIT 0, 30";   
+       }
+       if($m==2){
+        $sql="SELECT * FROM ride WHERE `status`='active' AND `customer_id`='".$abc."'
+        ORDER BY total_fare DESC 
+        LIMIT 0, 30";
+       }
+       if($m==3){
+        $sql="SELECT * FROM ride WHERE `status`='pending' AND `customer_id`='".$abc."'
+        ORDER BY total_fare DESC 
+        LIMIT 0, 30";
+       }
+       if($m==8){
+        $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."'
+        ORDER BY total_fare DESC 
+        LIMIT 0, 30";   
+       }
+
     $result=$conn->query($sql);
     if ($result->num_rows > 0) {
        
@@ -448,9 +490,25 @@ function filterrr($a,$filter,$conn){
     }
    }
    if($filter==1){
+    if($m==1){
+        $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."'
+        ORDER BY total_fare DESC ";   
+       }
+       if($m==2){
+        $sql="SELECT * FROM ride WHERE `status`='active' AND `customer_id`='".$abc."'
+        ORDER BY total_fare DESC ";
+       
+       }
+       if($m==3){
+        $sql="SELECT * FROM ride WHERE `status`='pending' AND `customer_id`='".$abc."'
+        ORDER BY total_fare DESC ";
+       }
+       if($m==8){
+        $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."'
+        ORDER BY total_fare DESC ";   
+       }
 
-    $sql="SELECT * FROM ride WHERE `status`='active' AND `customer_id`='".$abc."'
-    ORDER BY total_fare DESC ";
+  
     $result=$conn->query($sql);
     if ($result->num_rows > 0) {
        
@@ -469,9 +527,28 @@ function filterrr($a,$filter,$conn){
 
    }
    if($filter=='name'){
-    $sql="SELECT * FROM users WHERE `boolean_admin`='1'
-    ORDER BY `name` DESC 
-    LIMIT 0, 5";
+       if($m==1){
+        $sql="SELECT * FROM users WHERE `boolean_admin`='1'
+        ORDER BY `name` DESC 
+        LIMIT 0, 7";
+       }
+       if($m==2){
+        $sql="SELECT * FROM users WHERE `boolean_admin`='1' AND `boolean_status`='1'
+        ORDER BY `name` DESC 
+        LIMIT 0, 7";
+       }
+       if($m==3){
+        $sql="SELECT * FROM users WHERE `boolean_admin`='1' AND `boolean_status`='0'
+        ORDER BY `name` DESC 
+        LIMIT 0, 7";
+       }
+       if($m==13){
+        $sql="SELECT * FROM users WHERE `boolean_admin`='1'
+        ORDER BY `name` DESC 
+        LIMIT 0, 7";
+       }
+      
+ 
     $result=$conn->query($sql);
     if ($result->num_rows > 0) {
        
@@ -489,8 +566,27 @@ function filterrr($a,$filter,$conn){
    }
 
    if($filter=='fare'){
-    $sql="SELECT * FROM ride
-    ORDER BY total_fare DESC ";
+       if($m==4){
+        $sql="SELECT * FROM ride
+        ORDER BY total_fare DESC ";  
+       }
+       if($m==5){
+        $sql="SELECT * FROM ride WHERE `status`='active'
+        ORDER BY total_fare DESC ";
+       }
+       if($m==6){
+        $sql="SELECT * FROM ride WHERE `status`='pending'
+        ORDER BY total_fare DESC ";
+       }
+       if($m==7){
+        $sql="SELECT * FROM ride WHERE `status`='block'
+        ORDER BY total_fare DESC ";
+       }
+       if($m==13){
+        $sql="SELECT * FROM ride
+        ORDER BY total_fare DESC ";  
+       }
+ 
     $result=$conn->query($sql);
     if ($result->num_rows > 0) {
        
@@ -509,8 +605,27 @@ function filterrr($a,$filter,$conn){
 
    }
    if($filter=='date'){
-    $sql="SELECT * FROM ride
-    ORDER BY ride_date DESC ";
+    if($m==4){
+        $sql="SELECT * FROM ride
+        ORDER BY total_fare DESC ";  
+       }
+       if($m==5){
+        $sql="SELECT * FROM ride WHERE `status`='active'
+        ORDER BY total_fare DESC ";
+       }
+       if($m==6){
+        $sql="SELECT * FROM ride WHERE `status`='pending'
+        ORDER BY total_fare DESC ";
+       }
+       if($m==7){
+        $sql="SELECT * FROM ride WHERE `status`='block'
+        ORDER BY total_fare DESC ";
+       }
+       if($m==13){
+        $sql="SELECT * FROM ride
+        ORDER BY total_fare DESC ";  
+       }
+   
     $result=$conn->query($sql);
     if ($result->num_rows > 0) {
        
@@ -584,7 +699,8 @@ class admin{
 
 function ride( $a,$m,$conn){
     if($m==1){
-        echo "<center><h2>User </h2></center><center>";
+        echo "<span  class='bb'>Boolean_status is 0 for-<span class='bbb'> Non-Approved-User</span></span><br><span  class='bb'>Boolean_status is 1 for-<span class='bbb'> Approved-User</span></span>"; 
+        echo "<center><h2>User</h2></center><center>";
         $sql1="SELECT * from users where `boolean_admin`='1'";
         $result=$conn->query($sql1);
         if ($result->num_rows > 0) {
@@ -606,7 +722,8 @@ function ride( $a,$m,$conn){
 
     }
 if($m==2){
-    echo "<center><h2>User-approve </h2></center><center>";
+    echo "<span  class='bb'>Boolean_status is 0 for-<span class='bbb'> Non-Approved-User</span></span><br><span  class='bb'>Boolean_status is 1 for-<span class='bbb'> Approved-User</span></span>"; 
+    echo "<center><h2>Approved </h2><h3>User</h3></center><center>";
     $sql1="SELECT * from users Where `boolean_status`='1' AND  `boolean_admin`='1'";
     $result=$conn->query($sql1);
     if ($result->num_rows > 0) {
@@ -625,7 +742,8 @@ echo $a;
 }
 }
 if($m==3){
-    echo "<center><h2>User-pending </h2></center><center>";
+    echo "<span  class='bb'>Boolean_status is 0 for-<span class='bbb'> Non-Approved-User</span></span><br><span  class='bb'>Boolean_status is 1 for-<span class='bbb'> Approved-User</span></span>"; 
+    echo "<center><h2>Pending </h2><h3>User</h3></center><center>";
     $sql1="SELECT * from users Where `boolean_status`='0' ";
     $result=$conn->query($sql1);
     if ($result->num_rows > 0) {
@@ -643,6 +761,34 @@ echo $a;
 }
 
 }
+
+function loct($uid,$conn){
+    $sql="SELECT * from `location` WHERE `id`='".$uid."'";
+    echo $sql;
+    $result=$conn->query($sql);
+    print_r($result);
+    if ($result->num_rows > 0) {
+        while ($row= $result->fetch_assoc()) {
+            if($row['is_avb']==0){
+                $sql1="UPDATE `location` SET `is_avb`='1' WHERE `id`='".$uid."'";  
+                $result=$conn->query($sql1);
+                header("Location:admin.php?id=15");
+            }
+            elseif($row['is_avb']==1){
+                $sql1="UPDATE `location` SET `is_avb`='0' WHERE `id`='".$uid."'";  
+                $result=$conn->query($sql1);
+                header("Location:admin.php?id=9");
+            }
+        }
+    }
+
+
+
+    $sql="UPDATE `location` SET `is_avb`='1' WHERE `id`='".$uid."'";
+ 
+}
+
+
 function pending($m,$conn){
     $sql1="SELECT * from users Where `user_id`='".$m."' ";
     $result=$conn->query($sql1);
@@ -664,7 +810,7 @@ function pending($m,$conn){
 }
 function ride2($a,$m,$conn){
     if($m==4){
-        echo "<center><h2>User-ride </h2></center><center>";
+        echo "<center><h2>User</h2><h3>Ride</h3></center><center>";
         $sql1="SELECT * from ride";
         
         $result=$conn->query($sql1);
@@ -687,7 +833,7 @@ function ride2($a,$m,$conn){
 }
     }
 if($m==5){
-    echo "<center><h2>Approve-ride </h2></center><center>";
+    echo "<center><h2>Approved</h2><h3>Ride</h3></center><center>";
   
     $sql1="SELECT * from ride Where `status`='active'";
     
@@ -710,7 +856,7 @@ echo $a;
 }
 }
 if($m==6){
-    echo "<center><h2>Pending-ride </h2></center><center>";
+    echo "<center><h2>Pending </h2><h3>Ride</h3></center><center>";
   
     $sql1="SELECT * from ride Where `status`='pending'";
     
@@ -737,7 +883,7 @@ echo $a;
 }
 
 if($m==7){
-    echo "<center><h2>Cancel-ride </h2></center><center>";
+    echo "<center><h2>Cancel</h2><h3>Ride</h3></center><center>";
    $sql1="SELECT * from ride Where `status`='block'";
     $result=$conn->query($sql1);
    if ($result->num_rows > 0) {
@@ -760,15 +906,17 @@ echo $a;
 }
 function ride3($a,$m,$conn){
     if($m==8 || $m==9){
+        echo "<span  class='bb'>is_avb is 0 for-<span class='bbb'> Non-Working-Route</span></span><br><span  class='bb'>is_avb is 1 for-<span class='bbb'> Currently-Working-Route</span></span>"; 
         echo "<center><h2>Location</h2></center><center>";
       
-        $sql1="SELECT * from `location` ";
+        $sql1="SELECT * from `location` WHERE `is_avb`='1' ";
         $result=$conn->query($sql1);
         if ($result->num_rows > 0) {
             while ($row= $result->fetch_assoc()) {
                 $a.='<td>'.$row['location_name'].'</td>';
                 $a.='<td>'.$row['distance'].'</td>';
-                $a.='<td>'.$row['is_avb'].'</td></tr>';
+                $a.='<td>'.$row['is_avb'].'</td>';
+                $a.='<td><a href="update6.php?id='.$row['id'].'">Action</a></td></tr>';
         
         }
         $a.='</table>';
@@ -776,6 +924,30 @@ function ride3($a,$m,$conn){
         }
 
     }
+    if($m==15){
+        echo "<span  class='bb'>is_avb is 0 for-<span class='bbb'> Non-Working-Route</span></span><br><span  class='bb'>is_avb is 1 for-<span class='bbb'> Currently-Working-Route</span></span>"; 
+        echo "<center><h2>Location</h2></center><center>";
+      
+        $sql1="SELECT * from `location` WHERE `is_avb`='0' ";
+        $result=$conn->query($sql1);
+        if ($result->num_rows > 0) {
+            while ($row= $result->fetch_assoc()) {
+                $a.='<td>'.$row['location_name'].'</td>';
+                $a.='<td>'.$row['distance'].'</td>';
+                $a.='<td>'.$row['is_avb'].'</td>';
+                $a.='<td><a href="update6.php?id='.$row['id'].'">Update</a></td></tr>';
+        
+        }
+        $a.='</table>';
+        echo $a;
+        }
+
+    }
+
+
+
+
+
     if($m==10){
      echo $a;
     if(isset($_POST['submit'])){
