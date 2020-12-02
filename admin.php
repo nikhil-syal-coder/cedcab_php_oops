@@ -71,19 +71,27 @@ echo "<center><h2>Welcome "
   </div>
   
 </div>
-<div class="select">
-<form action="admin.php" method="POST">
-<center>Filter Value:-<select name="filter" id="filter">
-   <option value="Select Value">Select Value</option>
-   <option value="name">Name</option>
-   <option value="fare">Total-fare</option>
-   <option value="date">Date</option>
- 
-</select>
-<input type="submit" value="submit" name="submit" class="submitt">
-</center>
-</form>
-<?php
+
+<?php 
+if(isset($_GET['id'])){
+  $m=$_GET['id'];
+  if($m==13||$m==1||$m==2||$m==3||$m==4||$m==5||$m==6||$m==7){
+    $abc='<div class="select">
+    <form action="" method="POST">
+    <center>Your Choice  Our Filter :-<select name="filter" id="filter">
+       <option value="Select Value">Select Value</option>
+       <option value="name">Filter by Name</option>
+       <option value="fare">Filter by Total-fare</option>
+       <option value="date">Filter by Date</option>
+     
+    </select>
+    <input type="submit" value="submit" name="submit" class="submitt">
+    </center>
+    </form>';
+    echo $abc;
+  }
+}
+
 if (isset($_POST['submit'])) {
   require_once('class.php');
   require_once('config.php');
@@ -112,7 +120,7 @@ if(isset($_GET['id'])){
   $m=$_GET['id'];
   if($m==13){
     $b='<div class="form"><div class="form1">
-    <h2>Total User</h2>';
+    <h2><a href="admin.php?id=1">Total User</h2>';
     echo $b;
 $obj3= new DB();
 $obj55=new admin();
@@ -131,7 +139,7 @@ if(isset($_GET['id'])){
   if($m==13){
     $b='
     <div class="form1">
-    <h2>Total Fare collection in Cedcab</h2>';
+    <h2><a href="admin.php?id=4">Total Fare collection in Cedcab</a></h2>';
     echo $b;
 $obj3= new DB();
 $obj55=new admin();
@@ -148,7 +156,7 @@ if(isset($_GET['id'])){
   $m=$_GET['id'];
   if($m==13){
     $b='<div class="form1">
-    <h2>No. of approved user in cedcab</h2>';
+    <h2><a href="admin.php?id=2">No. of approved user in cedcab</a></h2>';
     echo $b;
 $obj3= new DB();
 $obj55=new admin();
@@ -166,7 +174,7 @@ if(isset($_GET['id'])){
   $m=$_GET['id'];
   if($m==13){
     $b='<div class="form1">
-    <h2>Total Blocked User</h2>';
+    <h2><a href="admin.php?id=1">Total Blocked User</a></h2>';
     echo $b;
 $obj3= new DB();
 $obj55=new admin();
@@ -184,7 +192,7 @@ if(isset($_GET['id'])){
   $m=$_GET['id'];
   if($m==13){
     $b='<div class="form1">
-    <h2>Total pending request  in cedcab</h2>';
+    <h2><a href="admin.php?id=6">Total pending request  in cedcab</a></h2>';
     echo $b;
 $obj3= new DB();
 $obj55=new admin();
@@ -202,7 +210,7 @@ if(isset($_GET['id'])){
   $m=$_GET['id'];
   if($m==13){
     $b='<div class="form1">
-    <h2>Total block request  in cedcab</h2>';
+    <h2><a href="admin.php?id=7">Total block request  in cedcab</a></h2>';
     echo $b;
 $obj3= new DB();
 $obj55=new admin();
@@ -252,7 +260,7 @@ if($m==4||$m==5||$m==6||$m==7){
     $obj4->ride2($a,$m,$obj3->conn);
   }
   if($m==7){
-    $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Status</th><th>Action-1</th><th>Action-2</th></tr><tr>";   
+    $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Status</th></tr><tr>";   
     $obj4->ride2($a,$m,$obj3->conn);
   }
 }
@@ -268,7 +276,7 @@ if($m==8||$m==9||$m==10){
 
 }
 if($m==11){
-  $a='<form action="" method="POST" class="form11"><center><h2>Change-Password</h2></center><div><label for ="user-name"><h3>user-name</h3></label><input type ="text" id="user-name" class="user-name" name="username"><label for ="pass"><h3>Password</h3><input type ="password" id="pass" class="pass" name="pass"></label> <label for ="Phone"><h3>Phone</h3></label><input type ="text" name="phone" id="phone" class="phone"><br><br><input type="submit" class="buttnn" name="submit" value="Submit"></div></form>';   
+  $a='<form action="" method="POST" class="form11"><center><h2>Change-Password</h2></center><div><label for ="user-name"><h3>User-Name</h3></label><input type ="text" id="user-name" class="user-name" name="username" value="admin"><label for ="pass"><h3>New-Password</h3><input type ="password" id="pass" class="pass" name="pass"></label> <label for ="pass"><h3>Old-Password</h3></label><input type ="password" name="opass" id="phone" class="opass"><br><br><input type="submit" class="buttnn" name="submit" value="Submit"></div></form>';   
   $obj4->ride4($a,$obj3->conn);
 }
 if($m==12){

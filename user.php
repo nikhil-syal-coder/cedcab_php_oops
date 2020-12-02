@@ -22,6 +22,7 @@ require_once('config.php');
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="cab/jquery.js"></script>
 <link href="cab.css" rel="stylesheet">
+
 <body>
 
 <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
@@ -64,9 +65,12 @@ echo "<center><h2>Welcome "
   </div>
  
   </div>
-
-<div class="select">
-<form action="user.php" method="POST">
+<?php 
+if(isset($_GET['id'])){
+  $m=$_GET['id'];
+  if($m==8 || $m==1 || $m==2||$m==3){
+$abc='<div class="select">
+<form action="" method="POST">
 <center>Your Choice  Our Filter :-<select name="filter" id="filter">
    <option value="Select Value">Select Value</option>
    <option value="7">Rides in 7 days</option>
@@ -76,27 +80,25 @@ echo "<center><h2>Welcome "
 </select>
 <input type="submit" value="Submit" name="submit" class="submitt">
 </center>
-</form>
-<?php
+</form>';
+  
+  echo $abc;
+ 
+
+  }
+}
 if (isset($_POST['submit'])) {
   require_once('class.php');
   require_once('config.php');
    $obj3= new DB();
    $ab=new user();
   $filter=isset($_POST['filter'])?$_POST['filter']:'';
-  if($filter==1){
+
     $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th></tr><tr>";
     $ab->filterrr($a,$filter,$obj3->conn);
-  }
-  else{
 
-  
-  $a='<table><tr><th>User_id</th><th>Name</th><th>Contact</th><th>Date </th><th>username</th></tr><tr>';
-  $ab->filterrr($a,$filter,$obj3->conn);
-  }
+
 }
-
-
 ?>
 
 
@@ -107,7 +109,7 @@ if(isset($_GET['id'])){
   if($m==8){
     $a='<div class="form">
     <div class="form1">
-    <h2>Total fare spend in cedcab</h2>';
+    <h2><a href="user.php?id=2">Total fare spend in cedcab</a></h2>';
   
 
 
@@ -126,7 +128,7 @@ if(isset($_GET['id'])){
   if($m==8){
     $a='
     <div class="form1">
-    <h2>Total Rides in cedcab</h2>';
+    <h2><a href="user.php?id=1">Total Rides in cedcab</a></h2>';
   
 
 
@@ -146,7 +148,7 @@ if(isset($_GET['id'])){
   if($m==8){
     $a='
     <div class="form1">
-    <h2>Last pending rides in cedcab</h2>';
+    <h2><a href="user.php?id=3">Last pending rides in cedcab</a></h2>';
   
 
 
@@ -171,24 +173,28 @@ $obj5=new user();
 
 if(isset($_GET['id'])){
   $m=$_GET['id'];
+  if($m>99){
+  
+    $obj5->invoice($m,$obj3->conn);
+  }
   if($m==1||$m==2||$m==3){
     if($m==1){
       $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Status</th></tr><tr>";
       $obj5->userpanel($a,$m,$obj3->conn);
     }
     if($m==2){
-      $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Status</th></tr><tr>";
+      $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Status</th><th>Action</th></tr><tr>";
       $obj5->userpanel($a,$m,$obj3->conn);
     }
    if($m==3){
-    $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Status</th><th>Action-1</th><th>Action-2</th></tr><tr>";
+    $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Status</th></tr><tr>";
     $obj5->userpanel($a,$m,$obj3->conn);
    }
   
   }
 if($m==4 || $m==5 || $m==6){
   if($m==4){
-    $a='<table><tr><th>User_id</th><th>Name</th><th>Contact</th><th>Date </th><th>username</th></tr><tr>';
+    $a='<table><tr><th>User_id</th><th>Name</th><th>Contact</th><th>Date </th><th>username</th><th>Action-1</th><th>Action-2</th></tr><tr>';
     $obj5->form($a,$m,$obj3->conn);
   }
   if($m==5){
@@ -204,7 +210,8 @@ if($m==4 || $m==5 || $m==6){
     $a='<form action="" method="POST"  class="form11">';
     $a.='<center><h2>Update-Password</center></h2>';
     $a.='<div><label for ="user-name"><h3>User-Name</h3></label><input type ="text" id="user-name" class="user-name" name="username" value="my">';
-    $a.='<label for ="password"><h3>Updated-Password</h3><input type ="text" id="password" class="password" name="pass"><br><br></div>';
+    $a.='<label for ="password"><h3>New-Password</h3><input type ="text" id="password" class="password" name="pass"><br>';
+    $a.='<label for ="password"><h3>old-Password</h3><input type ="text" id="password" class="password" name="opass"><br><br>';
     $a.='<input type="submit" class="buttn" name="submit" value="Submit"></div></center></form>'; 
     $obj5->form($a,$m,$obj3->conn);
   }

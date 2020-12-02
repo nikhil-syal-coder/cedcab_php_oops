@@ -41,7 +41,7 @@
             <h3>OR</h3>
             <p><a href="signup.php" id="sign">Register a new user</a></p>
             <h3>OR</h3>
-            <p><a href="signup.php" id="sign">Forget Password</a></p>
+            <p><a href="index.php" id="sign">Book a ride</a></p>
         </div>
     </div>
     </center>
