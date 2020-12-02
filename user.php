@@ -177,7 +177,7 @@ $obj5->fetch3($obj3->conn);
 </div>
 
 <div class="w3-container abc" style="
-    margin-bottom: 20px;
+    margin-bottom: 90px;
 ">
 <?php 
 require_once('class.php');
