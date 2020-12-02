@@ -18,6 +18,18 @@ require_once('config.php');
 <!DOCTYPE html>
 <html>
 <title>User-Panel</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script><!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script> -->
+<script src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"><link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="cab/jquery.js"></script>
@@ -164,7 +176,9 @@ $obj5->fetch3($obj3->conn);
 
 </div>
 
-<div class="w3-container">
+<div class="w3-container abc" style="
+    margin-bottom: 20px;
+">
 <?php 
 require_once('class.php');
 require_once('config.php');
@@ -228,7 +242,34 @@ if($m==7){
 </div>
 
 </div>
+<div class="container-fluid" style="background-color:rgb(0,128,128);" >
+	<div class="row">
+		<div class=" col-md-4 col-lg-4  col-sm-12 col-xs-12 mt-3 text-center">
+		
+<a class="btn-floating btn-lg btn-fb" type="button" role="button"><i class="fab fa-facebook-f"></i></a>
 
+<a class="btn-floating btn-lg btn-tw" type="button" role="button"><i class="fab fa-twitter"></i></a>
+
+<a class="btn-floating btn-lg btn-ins" type="button" role="button"><i class="fab fa-instagram"></i></a>
+		</div>
+	    <div class=" col-md-4 col-lg-4 col-sm-12 col-xs-12 text-center">
+	    	 <p class="mb-0 p">
+                   <a class="navbar-brand" style="font-size: 35px;color:rgba(218, 22, 74, 1); font-weight:40;">ce<span>dca</span>b</a>
+         </p>
+                    
+	    </div>
+		<div class=" col-md-4 col-lg-4 col-sm-12 col-xs-12 mt-3 text-center">
+			<nav class="">
+				
+                       <a href="#" class="ml-3 " >FEATURES</a>
+                        <a href="#" class="ml-3">REVIEW</a>
+                        <a href="user.php?id=7" class="ml-3" >LOG-OUT</a>
+                 
+
+			</nav>
+		</div>
+	</div>
+</div>
 <script>
 function w3_open() {
   document.getElementById("main").style.marginLeft = "25%";
@@ -312,6 +353,7 @@ label{
    background-color:rgb(9,121,120);
    color:white;
  }
+ 
 </style>
 </body>
 </html>
