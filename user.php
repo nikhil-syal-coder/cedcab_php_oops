@@ -87,6 +87,10 @@ $abc='<div class="select">
    <option value="Select Value">Select Value</option>
    <option value="7">Rides in 7 days</option>
    <option value="30">Rides in 30 days</option>
+   <option value="mini">Rides in Cedmini</option>
+   <option value="micro">Rides in Cedmicro</option>
+   <option value="royal">Rides in Cedroyal</option>
+   <option value="suv">Rides in Cedsuv</option>
    <option value="1">Sorting Fare</option>
  
 </select>
@@ -106,7 +110,7 @@ if (isset($_POST['submit'])) {
    $ab=new user();
   $filter=isset($_POST['filter'])?$_POST['filter']:'';
 
-    $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th></tr><tr>";
+    $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Cab-Name</th><th>Laugage</th></tr><tr>";
     $ab->filterrr($a,$m,$filter,$obj3->conn);
 
 
@@ -129,11 +133,12 @@ echo $a;
 $obj3= new DB();
 $obj5=new user();
 $obj5->fetch($obj3->conn);
+echo '</div>';
   }
 }
 
 ?>
-</div>
+
 <?php
 if(isset($_GET['id'])){
   $m=$_GET['id'];
@@ -148,12 +153,13 @@ echo $a;
 $obj3= new DB();
 $obj5=new user();
 $obj5->fetch2($obj3->conn);
+echo '</div>';
   }
 
 }
 
 ?>
-</div>
+
 <?php
 if(isset($_GET['id'])){
   $m=$_GET['id'];
@@ -168,11 +174,12 @@ echo $a;
 $obj3= new DB();
 $obj5=new user();
 $obj5->fetch3($obj3->conn);
+echo '</div>';
   }
 }
 
 ?>
-</div>
+
 
 </div>
 
@@ -193,15 +200,15 @@ if(isset($_GET['id'])){
   }
   if($m==1||$m==2||$m==3){
     if($m==1){
-      $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Status</th></tr><tr>";
+      $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Status</th><th>Cab-Type</th></tr><tr>";
       $obj5->userpanel($a,$m,$obj3->conn);
     }
     if($m==2){
-      $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Status</th><th>Action</th></tr><tr>";
+      $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Status</th><th>Cab-Type</th><th>Action</th></tr><tr>";
       $obj5->userpanel($a,$m,$obj3->conn);
     }
    if($m==3){
-    $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Status</th></tr><tr>";
+    $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Status</th><th>Cab-Type</th></tr><tr>";
     $obj5->userpanel($a,$m,$obj3->conn);
    }
   
@@ -223,10 +230,10 @@ if($m==4 || $m==5 || $m==6){
   if($m==6){
     $a='<form action="" method="POST"  class="form11">';
     $a.='<center><h2>Update-Password</center></h2>';
-    $a.='<div><label for ="user-name"><h3>User-Name</h3></label><input type ="text" id="user-name" class="user-name" name="username" value="my">';
-    $a.='<label for ="password"><h3>New-Password</h3><input type ="text" id="password" class="password" name="pass"><br>';
-    $a.='<label for ="password"><h3>old-Password</h3><input type ="text" id="password" class="password" name="opass"><br><br>';
-    $a.='<input type="submit" class="buttn" name="submit" value="Submit"></div></center></form>'; 
+    $a.='<div><p><label for ="user-name"><h3>User-Name</h3></label><input type ="text" id="user-name" class="user-name" name="username" value="my"></p>';
+    $a.='<p><label for ="password"><h3>New-Password</h3><input type ="text" id="password" class="password" name="pass"></p>';
+    $a.='<p><label for ="password"><h3>Old-Password</h3><input type ="text" id="password" class="password" name="opass"><br></p>';
+    $a.='<p><input type="submit" class="buttn" name="submit" value="Submit"></p></div></center></form>'; 
     $obj5->form($a,$m,$obj3->conn);
   }
 
@@ -241,7 +248,7 @@ if($m==7){
 
 </div>
 
-</div>
+
 <div class="container-fluid" style="background-color:rgb(0,128,128);" >
 	<div class="row">
 		<div class=" col-md-4 col-lg-4  col-sm-12 col-xs-12 mt-3 text-center">
@@ -269,6 +276,7 @@ if($m==7){
 			</nav>
 		</div>
 	</div>
+</div>
 </div>
 <script>
 function w3_open() {
@@ -352,6 +360,11 @@ label{
    width:200px;
    background-color:rgb(9,121,120);
    color:white;
+ }
+ .form11{
+   padding-bottom:30px;
+   font-weight:bold;
+   padding-left:10px;
  }
  
 </style>

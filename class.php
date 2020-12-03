@@ -66,7 +66,7 @@ require_once('config.php');
                                 }
                                 else{
                                     // header("Location:cab\index2.php");
-                                    header("Location:user.php?id=8");
+                                    header("Location:cab/index2.php");
 
                                 }
                                
@@ -102,6 +102,7 @@ require_once('config.php');
                     $a.='<tr><th>Pickup</th><td>'.$row['pickup'].'</td></tr>';
                     $a.='<tr><th>Drop</th><td>'.$row['drop'].'</td></tr>';
                     $a.='<tr><th>Total-Distance</th><td>'.$row['total_distance'].'</td></tr>';
+                    $a.='<tr><th>CAB-TYPE</th><td>'.$row['cab_type'].'</td></tr>';
                     $a.='<tr><th>Total-fare</th><td>'.$row['total_fare'].'</td></tr>';
                     $a.='<tr><th>laugage</th><td>'.$row['laugage'].'</td></tr>';
                     $a.='<tr><th>Action</th><td><a href="#" class="inv" onclick="javascript:window.print()">Print</a></td><td></tr>';
@@ -176,7 +177,8 @@ require_once('config.php');
                     $a.='<td>'.$row['total_distance'].'</td>';
                     $a.='<td>'.$row['total_fare'].'</td>';
                     $a.='<td>'.$row['laugage'].'</td>';
-                    $a.='<td>'.$row['status'].'</td></tr>';
+                    $a.='<td>'.$row['status'].'</td>';
+                    $a.='<td>'.$row['cab_type'].'</td></tr>';
                 }
                 $a.='</table>';
                 echo $a;
@@ -211,6 +213,7 @@ require_once('config.php');
                     $a.='<td>'.$row['total_fare'].'</td>';
                     $a.='<td>'.$row['laugage'].'</td>';
                     $a.='<td>'.$row['status'].'</td>';
+                    $a.='<td>'.$row['cab_type'].'</td>';
                     $a.='<td><a href="user2.php?id='.$row['ride_id'].'00">Invoice</a></td></tr>';
                  
                 }
@@ -248,7 +251,8 @@ if($m==3){
             $a.='<td>'.$row['total_distance'].'</td>';
             $a.='<td>'.$row['total_fare'].'</td>';
             $a.='<td>'.$row['laugage'].'</td>';
-            $a.='<td>'.$row['status'].'</td></tr>';
+            $a.='<td>'.$row['status'].'</td>';
+            $a.='<td>'.$row['cab_type'].'</td></tr>';
         }
         $a.='</table>';
         echo $a;
@@ -407,6 +411,159 @@ function filterrr($a,$m,$filter,$conn){
           $abc=$row['user_id'];
         }
     }
+    if($filter=='mini' ){
+        if($m==1){
+         $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."' AND `cab_type`='CedMini'
+         ORDER BY total_fare DESC 
+         LIMIT 0, 7";   
+        }
+        if($m==2){
+         $sql="SELECT * FROM ride WHERE `status`='active' AND `customer_id`='".$abc."' AND `cab_type`='CedMini'
+         ORDER BY total_fare DESC 
+         LIMIT 0, 7";
+        }
+        if($m==3){
+         $sql="SELECT * FROM ride WHERE `status`='pending' AND `customer_id`='".$abc."' AND `cab_type`='CedMini'
+         ORDER BY total_fare DESC 
+         LIMIT 0, 7";
+        }
+        if($m==8){
+         $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."' AND `cab_type`='CedMini'
+         ORDER BY total_fare DESC 
+         LIMIT 0, 7";   
+        }
+     $result=$conn->query($sql);
+     if ($result->num_rows > 0) {
+        
+         while ($row= $result->fetch_assoc()) {
+             $a.='<td>'.$row['ride_id'].'</td>';
+             $a.='<td>'.$row['ride_date'].'</td>';
+             $a.='<td>'.$row['pickup'].'</td>';
+             $a.='<td>'.$row['drop'].'</td>';
+             $a.='<td>'.$row['total_distance'].'</td>';
+             $a.='<td>'.$row['total_fare'].'</td>';
+             $a.='<td>'.$row['cab_type'].'</td>';
+             $a.='<td>'.$row['laugage'].'</td></tr>';
+         }
+         $a.='</table>';
+         echo $a;
+     }
+    }
+    if($filter=='micro' ){
+        if($m==1){
+         $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."' AND `cab_type`='CedMicro'
+         ORDER BY total_fare DESC 
+         LIMIT 0, 7";   
+        }
+        if($m==2){
+         $sql="SELECT * FROM ride WHERE `status`='active' AND `customer_id`='".$abc."' AND `cab_type`='CedMicro'
+         ORDER BY total_fare DESC 
+         LIMIT 0, 7";
+        }
+        if($m==3){
+         $sql="SELECT * FROM ride WHERE `status`='pending' AND `customer_id`='".$abc."' AND `cab_type`='CedMicro'
+         ORDER BY total_fare DESC 
+         LIMIT 0, 7";
+        }
+        if($m==8){
+         $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."' AND `cab_type`='CedMicro'
+         ORDER BY total_fare DESC 
+         LIMIT 0, 7";   
+        }
+     $result=$conn->query($sql);
+     if ($result->num_rows > 0) {
+        
+         while ($row= $result->fetch_assoc()) {
+             $a.='<td>'.$row['ride_id'].'</td>';
+             $a.='<td>'.$row['ride_date'].'</td>';
+             $a.='<td>'.$row['pickup'].'</td>';
+             $a.='<td>'.$row['drop'].'</td>';
+             $a.='<td>'.$row['total_distance'].'</td>';
+             $a.='<td>'.$row['total_fare'].'</td>';
+             $a.='<td>'.$row['cab_type'].'</td>';
+             $a.='<td>'.$row['laugage'].'</td></tr>';
+         }
+         $a.='</table>';
+         echo $a;
+     }
+    }
+
+    if($filter=='suv' ){
+        if($m==1){
+         $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."' AND `cab_type`='Cedsuv'
+         ORDER BY total_fare DESC 
+         LIMIT 0, 7";   
+        }
+        if($m==2){
+         $sql="SELECT * FROM ride WHERE `status`='active' AND `customer_id`='".$abc."' AND `cab_type`='Cedsuv'
+         ORDER BY total_fare DESC 
+         LIMIT 0, 7";
+        }
+        if($m==3){
+         $sql="SELECT * FROM ride WHERE `status`='pending' AND `customer_id`='".$abc."' AND `cab_type`='Cedsuv'
+         ORDER BY total_fare DESC 
+         LIMIT 0, 7";
+        }
+        if($m==8){
+         $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."' AND `cab_type`='Cedsuv'
+         ORDER BY total_fare DESC 
+         LIMIT 0, 7";   
+        }
+     $result=$conn->query($sql);
+     if ($result->num_rows > 0) {
+        
+         while ($row= $result->fetch_assoc()) {
+             $a.='<td>'.$row['ride_id'].'</td>';
+             $a.='<td>'.$row['ride_date'].'</td>';
+             $a.='<td>'.$row['pickup'].'</td>';
+             $a.='<td>'.$row['drop'].'</td>';
+             $a.='<td>'.$row['total_distance'].'</td>';
+             $a.='<td>'.$row['total_fare'].'</td>';
+             $a.='<td>'.$row['cab_type'].'</td>';
+             $a.='<td>'.$row['laugage'].'</td></tr>';
+         }
+         $a.='</table>';
+         echo $a;
+     }
+    }
+    if($filter=='royal' ){
+        if($m==1){
+         $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."' AND `cab_type`='Cedroyal'
+         ORDER BY total_fare DESC 
+         LIMIT 0, 7";   
+        }
+        if($m==2){
+         $sql="SELECT * FROM ride WHERE `status`='active' AND `customer_id`='".$abc."' AND `cab_type`='Cedroyal'
+         ORDER BY total_fare DESC 
+         LIMIT 0, 7";
+        }
+        if($m==3){
+         $sql="SELECT * FROM ride WHERE `status`='pending' AND `customer_id`='".$abc."' AND `cab_type`='Cedroyal'
+         ORDER BY total_fare DESC 
+         LIMIT 0, 7";
+        }
+        if($m==8){
+         $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."' AND `cab_type`='Cedroyal'
+         ORDER BY total_fare DESC 
+         LIMIT 0, 7";   
+        }
+     $result=$conn->query($sql);
+     if ($result->num_rows > 0) {
+        
+         while ($row= $result->fetch_assoc()) {
+             $a.='<td>'.$row['ride_id'].'</td>';
+             $a.='<td>'.$row['ride_date'].'</td>';
+             $a.='<td>'.$row['pickup'].'</td>';
+             $a.='<td>'.$row['drop'].'</td>';
+             $a.='<td>'.$row['total_distance'].'</td>';
+             $a.='<td>'.$row['total_fare'].'</td>';
+             $a.='<td>'.$row['cab_type'].'</td>';
+             $a.='<td>'.$row['laugage'].'</td></tr>';
+         }
+         $a.='</table>';
+         echo $a;
+     }
+    }
    if($filter==7 ){
        if($m==1){
         $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."'
@@ -445,6 +602,7 @@ function filterrr($a,$m,$filter,$conn){
             $a.='<td>'.$row['drop'].'</td>';
             $a.='<td>'.$row['total_distance'].'</td>';
             $a.='<td>'.$row['total_fare'].'</td>';
+            $a.='<td>'.$row['cab_type'].'</td>';
             $a.='<td>'.$row['laugage'].'</td></tr>';
         }
         $a.='</table>';
@@ -483,6 +641,7 @@ function filterrr($a,$m,$filter,$conn){
             $a.='<td>'.$row['drop'].'</td>';
             $a.='<td>'.$row['total_distance'].'</td>';
             $a.='<td>'.$row['total_fare'].'</td>';
+            $a.='<td>'.$row['cab_type'].'</td>';
             $a.='<td>'.$row['laugage'].'</td></tr>';
         }
         $a.='</table>';
@@ -492,20 +651,20 @@ function filterrr($a,$m,$filter,$conn){
    if($filter==1){
     if($m==1){
         $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."'
-        ORDER BY total_fare DESC ";   
+        ORDER BY total_fare ASC ";   
        }
        if($m==2){
         $sql="SELECT * FROM ride WHERE `status`='active' AND `customer_id`='".$abc."'
-        ORDER BY total_fare DESC ";
+        ORDER BY total_fare ASC ";
        
        }
        if($m==3){
         $sql="SELECT * FROM ride WHERE `status`='pending' AND `customer_id`='".$abc."'
-        ORDER BY total_fare DESC ";
+        ORDER BY total_fare ASC ";
        }
        if($m==8){
         $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."'
-        ORDER BY total_fare DESC ";   
+        ORDER BY total_fare ASC ";   
        }
 
   
@@ -519,6 +678,7 @@ function filterrr($a,$m,$filter,$conn){
             $a.='<td>'.$row['drop'].'</td>';
             $a.='<td>'.$row['total_distance'].'</td>';
             $a.='<td>'.$row['total_fare'].'</td>';
+            $a.='<td>'.$row['cab_type'].'</td>';
             $a.='<td>'.$row['laugage'].'</td></tr>';
         }
         $a.='</table>';
@@ -568,23 +728,23 @@ function filterrr($a,$m,$filter,$conn){
    if($filter=='fare'){
        if($m==4){
         $sql="SELECT * FROM ride
-        ORDER BY total_fare DESC ";  
+        ORDER BY total_fare ASC ";  
        }
        if($m==5){
         $sql="SELECT * FROM ride WHERE `status`='active'
-        ORDER BY total_fare DESC ";
+        ORDER BY total_fare ASC ";
        }
        if($m==6){
         $sql="SELECT * FROM ride WHERE `status`='pending'
-        ORDER BY total_fare DESC ";
+        ORDER BY total_fare ASC ";
        }
        if($m==7){
         $sql="SELECT * FROM ride WHERE `status`='block'
-        ORDER BY total_fare DESC ";
+        ORDER BY total_fare ASC ";
        }
        if($m==13){
         $sql="SELECT * FROM ride
-        ORDER BY total_fare DESC ";  
+        ORDER BY total_fare ASC ";  
        }
  
     $result=$conn->query($sql);

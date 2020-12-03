@@ -54,13 +54,13 @@ $obj5=new location();
 ?></a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link ml-5 h5 mt-2">Dashboard</a>
+                <a href="login.php" class="nav-link ml-5 h5 mt-2">Dashboard</a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link ml-5 h5 mt-2">Previous-Ride</a>
+                <a href="login.php" class="nav-link ml-5 h5 mt-2">Previous-Ride</a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link ml-5 h5 mt-2">Accounts</a>
+                <a href="login.php" class="nav-link ml-5 h5 mt-2">Accounts</a>
               </li>
               <li class="nav-item">
                 <a href="login.php" class="nav-link ml-5 h5 mt-2">Log-in</a>

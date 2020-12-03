@@ -171,10 +171,10 @@ $a='a';
 $obj55->adm($a,$obj3->conn);
   }
   }
-
+echo '</div>';
 ?>
 
-</div>
+
 
 <?php
 if(isset($_GET['id'])){
@@ -188,12 +188,12 @@ $obj3= new DB();
 $obj55=new admin();
 $a='b';
 $obj55->adm($a,$obj3->conn);
-
+echo '</div>';
   }
 }
 ?>
 
-</div>
+
 <?php
 if(isset($_GET['id'])){
   $m=$_GET['id'];
@@ -205,13 +205,13 @@ $obj3= new DB();
 $obj55=new admin();
 $a='c';
 $obj55->adm($a,$obj3->conn);
-
+echo '</div>';
   }
 }
 
 ?>
 
-</div>
+
 <?php
 if(isset($_GET['id'])){
   $m=$_GET['id'];
@@ -223,13 +223,15 @@ $obj3= new DB();
 $obj55=new admin();
 $a='d';
 $obj55->adm($a,$obj3->conn);
+echo '</div>';
+
   }
   }
 
 ?>
 
 
-</div>
+
 <?php
 if(isset($_GET['id'])){
   $m=$_GET['id'];
@@ -241,13 +243,14 @@ $obj3= new DB();
 $obj55=new admin();
 $a='e';
 $obj55->adm($a,$obj3->conn);
+echo '</div>';
   }
   }
 
 ?>
 
-</div>
-</div>
+
+
 <?php
 if(isset($_GET['id'])){
   $m=$_GET['id'];
@@ -259,11 +262,12 @@ $obj3= new DB();
 $obj55=new admin();
 $a='f';
 $obj55->adm($a,$obj3->conn);
+echo '</div>';
   }
   }
 
 ?>
-</div>
+
 </div>
 <div class="w3-container" style="margin-bottom:30px;">
 <?php 
@@ -336,7 +340,7 @@ if($m==12){
 ?>
 </div>
 
-</div>
+
 <div class="container-fluid" style="background-color:	rgb(0,128,128,1);" >
 	<div class="row">
 		<div class=" col-md-4 col-lg-4  col-sm-12 col-xs-12 mt-3 text-center">
@@ -364,6 +368,7 @@ if($m==12){
 			</nav>
 		</div>
 	</div>
+</div>
 </div>
 <script>
 function w3_open() {
