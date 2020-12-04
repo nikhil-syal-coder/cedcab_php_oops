@@ -83,20 +83,28 @@ if(isset($_GET['id'])){
   if($m==1 || $m==2||$m==3){
 $abc='<div class="select">
 <form action="" method="POST">
-<center>Your Choice  Our Filter :-<select name="filter" id="filter">
+<center>Your Choice  Our Sorting :-<select name="filter" id="filter">
    <option value="Select Value">Select Value</option>
    <option value="7">Rides in 7 days</option>
    <option value="30">Rides in 30 days</option>
+   
+   <option value="distance">Sorting by Distance </option>
+   <option value="1">Sorting by Fare</option></center>
+ 
+</select>
+<input type="submit" value="Sorting" name="submit" class="submitt">
+<br>
+<center>Filter by your choice : :-<select name="filter" id="filter">
+   <option value="Select Value">Select Value</option>
+
    <option value="mini">Rides in Cedmini</option>
    <option value="micro">Rides in Cedmicro</option>
    <option value="royal">Rides in Cedroyal</option>
-   <option value="suv">Rides in Cedsuv</option>
-   <option value="distance">Sorting by Distance </option>
-   <option value="1">Sorting by Fare</option>
- 
+   <option value="suv">Rides in Cedsuv</option></center>
 </select>
-<input type="submit" value="Submit" name="submit" class="submitt">
-</center>
+<input type="submit" value="Filter" name="submit" class="submitt">
+
+
 </form>';
   
   echo $abc;
@@ -209,7 +217,7 @@ if(isset($_GET['id'])){
       $obj5->userpanel($a,$m,$obj3->conn);
     }
    if($m==3){
-    $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Status</th><th>Cab-Type</th></tr><tr>";
+    $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Status</th><th>Cab-Type</th><th>Action</th></tr><tr>";
     $obj5->userpanel($a,$m,$obj3->conn);
    }
   
@@ -369,6 +377,8 @@ label{
  }
  .a11{
    color:red;
+   border: 1px solid grey;
+   padding: 5px;
  }
  
 </style>

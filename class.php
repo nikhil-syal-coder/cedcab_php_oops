@@ -255,7 +255,8 @@ if($m==3){
             $a.='<td>'.$row['total_fare'].'</td>';
             $a.='<td>'.$row['laugage'].'</td>';
             $a.='<td>'.$row['status'].'</td>';
-            $a.='<td>'.$row['cab_type'].'</td></tr>';
+            $a.='<td>'.$row['cab_type'].'</td>';
+            $a.='<td><a href="cancel.php?id='.$row['ride_id'].'" class="a11">Cancel-Ride</a></td></tr>';
         }
         $a.='</table>';
         echo $a;
@@ -457,24 +458,172 @@ function filterrr($a,$m,$filter,$conn){
          ORDER BY total_fare DESC 
          LIMIT 0, 7";
         }
+
+        $result=$conn->query($sql);
+        if ($result->num_rows > 0) {
+           
+            while ($row= $result->fetch_assoc()) {
+                $a.='<td>'.$row['ride_id'].'</td>';
+                $a.='<td>'.$row['ride_date'].'</td>';
+                $a.='<td>'.$row['pickup'].'</td>';
+                $a.='<td>'.$row['drop'].'</td>';
+                $a.='<td>'.$row['total_distance'].'</td>';
+                $a.='<td>'.$row['total_fare'].'</td>';
+                $a.='<td>'.$row['cab_type'].'</td>';
+                $a.='<td>'.$row['laugage'].'</td></tr>';
+            }
+            $a.='</table>';
+            echo $a;
+        }
+       }
+    if($filter=='minii' ){
+            if($m==4){
+
+             $sql="SELECT * FROM ride  WHERE  `cab_type`='CedMini'
+             ORDER BY total_fare DESC"; 
+            
+            }
+            if($m==5){
+             $sql="SELECT * FROM ride WHERE `status`='active' AND `cab_type`='CedMini'
+             ORDER BY total_fare DESC ";
+            
+            }
+            if($m==6){
+             $sql="SELECT * FROM ride WHERE `status`='pending' AND  `cab_type`='CedMini'
+             ORDER BY total_fare DESC 
+             LIMIT 0, 7";
+            }
+            if($m==7){
+                $sql="SELECT * FROM ride WHERE `status`='cancelled' AND `cab_type`='CedMini'
+                ORDER BY total_fare DESC 
+                LIMIT 0, 7";
+            }
+               $result=$conn->query($sql);
+            
+               if ($result->num_rows > 0) {
+                  
+                   while ($row= $result->fetch_assoc()) {
+                       $a.='<td>'.$row['ride_id'].'</td>';
+                       $a.='<td>'.$row['ride_date'].'</td>';
+                       $a.='<td>'.$row['pickup'].'</td>';
+                       $a.='<td>'.$row['drop'].'</td>';
+                       $a.='<td>'.$row['total_distance'].'</td>';
+                       $a.='<td>'.$row['total_fare'].'</td>';
+                       $a.='<td>'.$row['cab_type'].'</td>';
+                       $a.='<td>'.$row['laugage'].'</td></tr>';
+                   }
+                   $a.='</table>';
+                   echo $a;
+               }
+              }
+        if($filter=='microo' ){
+            if($m==4){
+             $sql="SELECT * FROM ride  WHERE   `cab_type`='CedMicro'
+             ORDER BY total_fare DESC 
+             LIMIT 0, 7";   
+            }
+            if($m==5){
+             $sql="SELECT * FROM ride WHERE `status`='active'  AND `cab_type`='CedMicro'
+             ORDER BY total_fare DESC 
+             LIMIT 0, 7";
+            }
+            if($m==6){
+             $sql="SELECT * FROM ride WHERE `status`='pending'  AND `cab_type`='CedMicro'
+             ORDER BY total_fare DESC 
+             LIMIT 0, 7";
+            }
+            if($m==7){
+                $sql="SELECT * FROM ride WHERE `status`='cancelled' AND `cab_type`='CedMicro'
+                ORDER BY total_fare DESC 
+                LIMIT 0, 7";
+               }
+               $result=$conn->query($sql);
+               if ($result->num_rows > 0) {
+                  
+                   while ($row= $result->fetch_assoc()) {
+                       $a.='<td>'.$row['ride_id'].'</td>';
+                       $a.='<td>'.$row['ride_date'].'</td>';
+                       $a.='<td>'.$row['pickup'].'</td>';
+                       $a.='<td>'.$row['drop'].'</td>';
+                       $a.='<td>'.$row['total_distance'].'</td>';
+                       $a.='<td>'.$row['total_fare'].'</td>';
+                       $a.='<td>'.$row['cab_type'].'</td>';
+                       $a.='<td>'.$row['laugage'].'</td></tr>';
+                   }
+                   $a.='</table>';
+                   echo $a;
+               }
+              }
+        if($filter=='suvv' ){
+            if($m==4){
+             $sql="SELECT * FROM ride  WHERE  `cab_type`='Cedsuv'
+             ORDER BY total_fare DESC ";
+            
+            }
+            if($m==5){
+             $sql="SELECT * FROM ride WHERE `status`='active'  AND `cab_type`='Cedsuv'
+               ORDER BY total_fare DESC ";
+            }
+            if($m==6){
+             $sql="SELECT * FROM ride WHERE `status`='pending' AND `cab_type`='Cedsuv'
+             ORDER BY total_fare DESC ";
+            }
+            if($m==7){
+                $sql="SELECT * FROM ride WHERE `status`='cancelled'  AND `cab_type`='Cedsuv'
+                  ORDER BY total_fare DESC ";
+               }
+               $result=$conn->query($sql);
+               if ($result->num_rows > 0) {
+                  
+                   while ($row= $result->fetch_assoc()) {
+                       $a.='<td>'.$row['ride_id'].'</td>';
+                       $a.='<td>'.$row['ride_date'].'</td>';
+                       $a.='<td>'.$row['pickup'].'</td>';
+                       $a.='<td>'.$row['drop'].'</td>';
+                       $a.='<td>'.$row['total_distance'].'</td>';
+                       $a.='<td>'.$row['total_fare'].'</td>';
+                       $a.='<td>'.$row['cab_type'].'</td>';
+                       $a.='<td>'.$row['laugage'].'</td></tr>';
+                   }
+                   $a.='</table>';
+                   echo $a;
+               }
+              }
+        if($filter=='royall' ){
+            if($m==4){
+             $sql="SELECT * FROM ride  WHERE  `cab_type`='Cedroyal'
+                ORDER BY total_fare DESC ";  
+            }
+            if($m==5){
+             $sql="SELECT * FROM ride WHERE `status`='active' AND `cab_type`='Cedroyal'
+          ORDER BY total_fare DESC ";
+            }
+            if($m==6){
+             $sql="SELECT * FROM ride WHERE `status`='pending'  AND `cab_type`='Cedroyal'
+               ORDER BY total_fare DESC ";
+            }
+            if($m==7){
+                $sql="SELECT * FROM ride WHERE `status`='cancelled'  AND `cab_type`='Cedroyal'
+                   ORDER BY total_fare DESC ";
+               }
+               $result=$conn->query($sql);
+               if ($result->num_rows > 0) {
+                  
+                   while ($row= $result->fetch_assoc()) {
+                       $a.='<td>'.$row['ride_id'].'</td>';
+                       $a.='<td>'.$row['ride_date'].'</td>';
+                       $a.='<td>'.$row['pickup'].'</td>';
+                       $a.='<td>'.$row['drop'].'</td>';
+                       $a.='<td>'.$row['total_distance'].'</td>';
+                       $a.='<td>'.$row['total_fare'].'</td>';
+                       $a.='<td>'.$row['cab_type'].'</td>';
+                       $a.='<td>'.$row['laugage'].'</td></tr>';
+                   }
+                   $a.='</table>';
+                   echo $a;
+               }
+              }
      
-     $result=$conn->query($sql);
-     if ($result->num_rows > 0) {
-        
-         while ($row= $result->fetch_assoc()) {
-             $a.='<td>'.$row['ride_id'].'</td>';
-             $a.='<td>'.$row['ride_date'].'</td>';
-             $a.='<td>'.$row['pickup'].'</td>';
-             $a.='<td>'.$row['drop'].'</td>';
-             $a.='<td>'.$row['total_distance'].'</td>';
-             $a.='<td>'.$row['total_fare'].'</td>';
-             $a.='<td>'.$row['cab_type'].'</td>';
-             $a.='<td>'.$row['laugage'].'</td></tr>';
-         }
-         $a.='</table>';
-         echo $a;
-     }
-    }
     if($filter=='micro' ){
         if($m==1){
          $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."' AND `cab_type`='CedMicro'
@@ -857,6 +1006,21 @@ if($filter=='distance'){
    }
 
 }
+function ride_user_cancel($m,$conn){
+  
+$sql="SELECT * from `ride` WHERE `ride_id`='".$m."'";
+$result=$conn->query($sql);
+if ($result->num_rows > 0){
+    $sql1="UPDATE `ride` SET `status`= 'cancelled'  WHERE `ride_id`='".$m."'";
+    $result=$conn->query($sql1);
+   echo"<script>alert('You cancelled that ride!!');</script>";
+    
+}
+
+header('location:user.php?id=3');
+}
+
+
  }
 class admin{
     
@@ -1015,6 +1179,7 @@ function ride2($a,$m,$conn){
         $a.='<td>'.$row['total_fare'].'</td>';
         $a.='<td>'.$row['laugage'].'</td>';
         $a.='<td>'.$row['status'].'</td>';
+        $a.='<td>'.$row['cab_type'].'</td>';
         $a.='<td><a href="update2.php?id='.$row['ride_id'].'" class="a11">Approve-Ride</a></td>';
         $a.='<td><a href="update3.php?id='.$row['ride_id'].'" class="a11">Cancel-Ride</a></td></tr>';
     }
@@ -1035,7 +1200,8 @@ if($m==5){
     $a.='<td>'.$row['total_distance'].'</td>';
     $a.='<td>'.$row['total_fare'].'</td>';
     $a.='<td>'.$row['laugage'].'</td>';
-    $a.='<td>'.$row['status'].'</td></tr>';
+    $a.='<td>'.$row['status'].'</td>';
+    $a.='<td>'.$row['cab_type'].'</td></tr>';
     
 }
 $a.='</table>';
@@ -1056,6 +1222,8 @@ if($m==6){
     $a.='<td>'.$row['total_fare'].'</td>';
     $a.='<td>'.$row['laugage'].'</td>';
     $a.='<td>'.$row['status'].'</td>';
+    $a.='<td>'.$row['cab_type'].'</td>';
+
     $a.='<td><a href="update2.php?id='.$row['ride_id'].'" class="a11">Approve-Ride</a></td>';
     $a.='<td><a href="update3.php?id='.$row['ride_id'].'" class="a11">Cancel-Ride</a></td></tr>';
 }
@@ -1079,7 +1247,8 @@ if($m==7){
     $a.='<td>'.$row['total_distance'].'</td>';
     $a.='<td>'.$row['total_fare'].'</td>';
     $a.='<td>'.$row['laugage'].'</td>';
-    $a.='<td>'.$row['status'].'</td></tr>';
+    $a.='<td>'.$row['status'].'</td>';
+    $a.='<td>'.$row['cab_type'].'</td></tr>';
 
 }
 $a.='</table>';

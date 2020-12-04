@@ -92,34 +92,21 @@ if(isset($_GET['id'])){
     if($m==1 || $m==2||$m==3){
       $abc='<div class="select">
       <form action="" method="POST">
-      <center>Your Choice  Our Filter :-<select name="filter" id="filter">
+      <center>Your Choice  Our Sorting :-<select name="filter" id="filter">
          <option value="Select Value">Select Value</option>
          <option value="name">Filter by Name</option>
        
       </select>
-      <input type="submit" value="submit" name="submit" class="submitt">
+      <input type="submit" value="Filter" name="submit" class="submitt">
       </center>
+     
       </form>';
     }
-    elseif($m==13){
-      $abc='<div class="select">
-      <form action="" method="POST">
-      <center>Your Choice  Our Filter :-<select name="filter" id="filter">
-      
-         <option value="Select Value">Select Value</option>
-         <option value="name">Sort by Name</option>
-         <option value="fare">Sort by Total-fare</option>
-         <option value="date">Sort by Date</option>
-       
-      </select>
-      <input type="submit" value="submit" name="submit" class="submitt">
-      </center>
-      </form>';
-    }
+ 
     else{
       $abc='<div class="select">
       <form action="" method="POST">
-      <center>Your Choice  Our Filter :-<select name="filter" id="filter">
+      <center>Your Choice  Our Sorting :-<select name="filter" id="filter">
          <option value="Select Value">Select Value</option>
          <option value="fare">Sort by Total-fare</option>
          <option value="date">Sort by Date</option>
@@ -128,6 +115,16 @@ if(isset($_GET['id'])){
       </select>
       <input type="submit" value="submit" name="submit" class="submitt">
       </center>
+      <center>Your Choice  Our Filter :-<select name="filter" id="filter">
+      <option value="Select Value">Select Value</option>
+      <option value="minii">Filter By Cedmini</option>
+      <option value="microo">Filter By Cedmicro</option>
+      <option value="royall">Filter By Cedroyal</option>
+      <option value="suvv">Filter By Cedsuv</option>
+    
+   </select>
+   <input type="submit" value="Sorting" name="submit" class="submitt">
+   </center>
       </form>';
     }
   
@@ -143,8 +140,8 @@ if (isset($_POST['submit'])) {
    $obj3= new DB();
    $ab=new user();
    $filter=isset($_POST['filter'])?$_POST['filter']:'';
-  if($filter==1 || $filter=='fare'|| $filter=='date'|| $filter=='dist'){
-    $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th></tr><tr>";
+  if($filter==1 || $filter=='fare'|| $filter=='date'|| $filter=='dist'||$filter=='microo'|| $filter=='minii'|| $filter=='suvv'|| $filter=='royall'){
+    $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Cab-type</th></tr><tr>";
     $ab->filterrr($a,$m,$filter,$obj3->conn);
   }
   else{
@@ -297,19 +294,19 @@ if($m==1||$m==2||$m==3){
 }
 if($m==4||$m==5||$m==6||$m==7){
   if($m==4){
-    $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Status</th><th>Action-1</th><th>Action-2</th></tr><tr>";   
+    $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Status</th><th>Cab-type</th><th>Action-1</th><th>Action-2</th></tr><tr>";   
     $obj4->ride2($a,$m,$obj3->conn);
   }
   if($m==5){
-    $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Status</th></tr><tr>";   
+    $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Status</th><th>Cab-type</th></tr><tr>";   
     $obj4->ride2($a,$m,$obj3->conn);
   }
   if($m==6){
-    $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Status</th><th>Action-1</th><th>Action-2</th></tr><tr>";   
+    $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Status</th><th>Cab-type</th><th>Action-1</th><th>Action-2</th></tr><tr>";   
     $obj4->ride2($a,$m,$obj3->conn);
   }
   if($m==7){
-    $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Status</th></tr><tr>";   
+    $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Status</th><th>Cab-type</th></tr><tr>";   
     $obj4->ride2($a,$m,$obj3->conn);
   }
 }
@@ -330,23 +327,6 @@ if($m==8||$m==9||$m==10||$m==15){
 
 }
 
-// if($m==11){
-
-//   $a='<form action="" method="POST"  class="form11">';
-//   $a.='<center><h2>Update-Password</center></h2>';
-//   $a.='<div><p><label for ="user-name"><h3>User-Name</h3></label><input type ="text" id="user-name" class="user-name" name="username" value="'.$_SESSION['userdata']['username'].'" readonly></p>';
-//   $a.='<p><label for ="password"><h3>Old-Password</h3></label><input type ="password" id="password" class="password" name="opass"></p>';
-//   $a.='<p><label for ="password"><h3>New-Password</h3></label><input type ="password" id="password" class="password" name="pass"></p>';
-//   $a.='<br><br><p><input type="submit" class="buttn" name="submit" value="Submit"></p></div></center></form>'; 
-//   echo $a;
-//   $varr= $obj4->adm_Pass($obj3->conn);
-//   echo $varr;
-//   if($varr == 1)
-//   {
-//     header("location:login.php");
-//   }
-
-// }
 
 if($m==111)
 {
