@@ -17,7 +17,7 @@ require_once('config.php');
             $count++;
                  }
         if($username!='admin'){
-            $sql="SELECT * FROM `users` WhERE `username`='".$username."'";
+            $sql="SELECT * FROM `users` WHERE `username`='".$username."'";
             $result=$conn->query($sql);
             if ($result->num_rows > 0) {
                 echo "<center><h3 style='color:white; font-size:1.2em;'>Username Already Exist</h3></center>"; 
@@ -444,16 +444,19 @@ function filterrr($a,$m,$filter,$conn){
     }
     if($filter=='mini' ){
         if($m==1){
+            echo "<center><h2>Your ride in cedmini</h2></center>";
          $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."' AND `cab_type`='CedMini'
          ORDER BY total_fare DESC 
          LIMIT 0, 7";   
         }
         if($m==2){
+            echo "<center><h2>Your Active ride in cedmini</h2></center>";
          $sql="SELECT * FROM ride WHERE `status`='active' AND `customer_id`='".$abc."' AND `cab_type`='CedMini'
          ORDER BY total_fare DESC 
          LIMIT 0, 7";
         }
         if($m==3){
+            echo "<center><h2>Your pending ride in cedmini</h2></center>";
          $sql="SELECT * FROM ride WHERE `status`='pending' AND `customer_id`='".$abc."' AND `cab_type`='CedMini'
          ORDER BY total_fare DESC 
          LIMIT 0, 7";
@@ -478,22 +481,25 @@ function filterrr($a,$m,$filter,$conn){
        }
     if($filter=='minii' ){
             if($m==4){
-
+                echo "<center><h2>Your ride in cedmini</h2></center>";
              $sql="SELECT * FROM ride  WHERE  `cab_type`='CedMini'
              ORDER BY total_fare DESC"; 
             
             }
             if($m==5){
+                echo "<center><h2>Your active ride in cedmini</h2></center>";
              $sql="SELECT * FROM ride WHERE `status`='active' AND `cab_type`='CedMini'
              ORDER BY total_fare DESC ";
             
             }
             if($m==6){
+                echo "<center><h2>Your pending ride in cedmini</h2></center>";
              $sql="SELECT * FROM ride WHERE `status`='pending' AND  `cab_type`='CedMini'
              ORDER BY total_fare DESC 
              LIMIT 0, 7";
             }
             if($m==7){
+                echo "<center><h2>Your cancelled ride in cedmini</h2></center>";
                 $sql="SELECT * FROM ride WHERE `status`='cancelled' AND `cab_type`='CedMini'
                 ORDER BY total_fare DESC 
                 LIMIT 0, 7";
@@ -518,21 +524,25 @@ function filterrr($a,$m,$filter,$conn){
               }
         if($filter=='microo' ){
             if($m==4){
+                echo "<center><h2>Your ride in cedmicro</h2></center>";
              $sql="SELECT * FROM ride  WHERE   `cab_type`='CedMicro'
              ORDER BY total_fare DESC 
              LIMIT 0, 7";   
             }
             if($m==5){
+                echo "<center><h2>Your active ride in cedmicro</h2></center>";
              $sql="SELECT * FROM ride WHERE `status`='active'  AND `cab_type`='CedMicro'
              ORDER BY total_fare DESC 
              LIMIT 0, 7";
             }
             if($m==6){
+                echo "<center><h2>Your pending ride in cedmicro</h2></center>";
              $sql="SELECT * FROM ride WHERE `status`='pending'  AND `cab_type`='CedMicro'
              ORDER BY total_fare DESC 
              LIMIT 0, 7";
             }
             if($m==7){
+                echo "<center><h2>Your cancelled ride in cedmicro</h2></center>";
                 $sql="SELECT * FROM ride WHERE `status`='cancelled' AND `cab_type`='CedMicro'
                 ORDER BY total_fare DESC 
                 LIMIT 0, 7";
@@ -556,19 +566,23 @@ function filterrr($a,$m,$filter,$conn){
               }
         if($filter=='suvv' ){
             if($m==4){
+                echo "<center><h2>Your ride in cedsuv</h2></center>";
              $sql="SELECT * FROM ride  WHERE  `cab_type`='Cedsuv'
              ORDER BY total_fare DESC ";
             
             }
             if($m==5){
+                echo "<center><h2>Your active ride in cedsuv</h2></center>";
              $sql="SELECT * FROM ride WHERE `status`='active'  AND `cab_type`='Cedsuv'
                ORDER BY total_fare DESC ";
             }
             if($m==6){
+                echo "<center><h2>Your pending ride in cedsuv</h2></center>";
              $sql="SELECT * FROM ride WHERE `status`='pending' AND `cab_type`='Cedsuv'
              ORDER BY total_fare DESC ";
             }
             if($m==7){
+                echo "<center><h2>Your cancelled ride in cedsuv</h2></center>";
                 $sql="SELECT * FROM ride WHERE `status`='cancelled'  AND `cab_type`='Cedsuv'
                   ORDER BY total_fare DESC ";
                }
@@ -591,18 +605,22 @@ function filterrr($a,$m,$filter,$conn){
               }
         if($filter=='royall' ){
             if($m==4){
+                echo "<center><h2>Your ride in cedroyal</h2></center>";
              $sql="SELECT * FROM ride  WHERE  `cab_type`='Cedroyal'
                 ORDER BY total_fare DESC ";  
             }
             if($m==5){
+                echo "<center><h2>Your active ride in cedroyal</h2></center>";
              $sql="SELECT * FROM ride WHERE `status`='active' AND `cab_type`='Cedroyal'
           ORDER BY total_fare DESC ";
             }
             if($m==6){
+                echo "<center><h2>Your pending ride in cedroyal</h2></center>";
              $sql="SELECT * FROM ride WHERE `status`='pending'  AND `cab_type`='Cedroyal'
                ORDER BY total_fare DESC ";
             }
             if($m==7){
+                echo "<center><h2>Your cancelled ride in cedroyal</h2></center>";
                 $sql="SELECT * FROM ride WHERE `status`='cancelled'  AND `cab_type`='Cedroyal'
                    ORDER BY total_fare DESC ";
                }
@@ -626,16 +644,19 @@ function filterrr($a,$m,$filter,$conn){
      
     if($filter=='micro' ){
         if($m==1){
+            echo "<center><h2>Your ride in cedmicro</h2></center>";
          $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."' AND `cab_type`='CedMicro'
          ORDER BY total_fare DESC 
          LIMIT 0, 7";   
         }
         if($m==2){
+            echo "<center><h2>Your active ride in cedmicro</h2></center>";
          $sql="SELECT * FROM ride WHERE `status`='active' AND `customer_id`='".$abc."' AND `cab_type`='CedMicro'
          ORDER BY total_fare DESC 
          LIMIT 0, 7";
         }
         if($m==3){
+            echo "<center><h2>Your pending ride in cedmicro</h2></center>";
          $sql="SELECT * FROM ride WHERE `status`='pending' AND `customer_id`='".$abc."' AND `cab_type`='CedMicro'
          ORDER BY total_fare DESC 
          LIMIT 0, 7";
@@ -661,16 +682,19 @@ function filterrr($a,$m,$filter,$conn){
 
     if($filter=='suv' ){
         if($m==1){
+            echo "<center><h2>Your ride in cedsuv</h2></center>";
          $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."' AND `cab_type`='Cedsuv'
          ORDER BY total_fare DESC 
          LIMIT 0, 7";   
         }
         if($m==2){
+            echo "<center><h2>Your active ride in cedsuv</h2></center>";
          $sql="SELECT * FROM ride WHERE `status`='active' AND `customer_id`='".$abc."' AND `cab_type`='Cedsuv'
          ORDER BY total_fare DESC 
          LIMIT 0, 7";
         }
         if($m==3){
+            echo "<center><h2>Your pending ride in cedsuv</h2></center>";
          $sql="SELECT * FROM ride WHERE `status`='pending' AND `customer_id`='".$abc."' AND `cab_type`='Cedsuv'
          ORDER BY total_fare DESC 
          LIMIT 0, 7";
@@ -695,16 +719,19 @@ function filterrr($a,$m,$filter,$conn){
     }
     if($filter=='royal' ){
         if($m==1){
+            echo "<center><h2>Your ride in cedroyal</h2></center>";
          $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."' AND `cab_type`='Cedroyal'
          ORDER BY total_fare DESC 
          LIMIT 0, 7";   
         }
         if($m==2){
+            echo "<center><h2>Your active ride in cedroyal</h2></center>";
          $sql="SELECT * FROM ride WHERE `status`='active' AND `customer_id`='".$abc."' AND `cab_type`='Cedroyal'
          ORDER BY total_fare DESC 
          LIMIT 0, 7";
         }
         if($m==3){
+            echo "<center><h2>Your pending ride in cedroyal</h2></center>";
          $sql="SELECT * FROM ride WHERE `status`='pending' AND `customer_id`='".$abc."' AND `cab_type`='Cedroyal'
          ORDER BY total_fare DESC 
          LIMIT 0, 7";
@@ -729,16 +756,19 @@ function filterrr($a,$m,$filter,$conn){
     }
    if($filter==7 ){
        if($m==1){
+        echo "<center><h2>Your total ride in last 7 days</h2></center>";
         $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."'
         ORDER BY total_fare DESC 
         LIMIT 0, 7";   
        }
        if($m==2){
+        echo "<center><h2>Your total active-ride in last 7 days</h2></center>";
         $sql="SELECT * FROM ride WHERE `status`='active' AND `customer_id`='".$abc."'
         ORDER BY total_fare DESC 
         LIMIT 0, 7";
        }
        if($m==3){
+        echo "<center><h2>Your total pending-ride in last 7 days</h2></center>";
         $sql="SELECT * FROM ride WHERE `status`='pending' AND `customer_id`='".$abc."'
         ORDER BY total_fare DESC 
         LIMIT 0, 7";
@@ -764,16 +794,19 @@ function filterrr($a,$m,$filter,$conn){
    }
    if($filter==30){
     if($m==1){
+        echo "<center><h2>Your  ride in last 30 days</h2></center>";
         $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."'
         ORDER BY total_fare DESC 
         LIMIT 0, 30";   
        }
        if($m==2){
+        echo "<center><h2>Your  active-ride in last 30 days</h2></center>";
         $sql="SELECT * FROM ride WHERE `status`='active' AND `customer_id`='".$abc."'
         ORDER BY total_fare DESC 
         LIMIT 0, 30";
        }
        if($m==3){
+        echo "<center><h2>Your  pending-ride in last 30 days</h2></center>";
         $sql="SELECT * FROM ride WHERE `status`='pending' AND `customer_id`='".$abc."'
         ORDER BY total_fare DESC 
         LIMIT 0, 30";
@@ -798,15 +831,18 @@ function filterrr($a,$m,$filter,$conn){
    }
    if($filter==1){
     if($m==1){
+        echo "<center><h2>Your total fare</h2></center>";
         $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."'
         ORDER BY total_fare ASC ";   
        }
        if($m==2){
+        echo "<center><h2>Your total fare</h2></center>";
         $sql="SELECT * FROM ride WHERE `status`='active' AND `customer_id`='".$abc."'
         ORDER BY total_fare ASC ";
        
        }
        if($m==3){
+        echo "<center><h2>Your total fare</h2></center>";
         $sql="SELECT * FROM ride WHERE `status`='pending' AND `customer_id`='".$abc."'
         ORDER BY total_fare ASC ";
        }

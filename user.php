@@ -127,7 +127,7 @@ if (isset($_POST['submit'])) {
 ?>
 
 
-</div>
+
 <?php
 if(isset($_GET['id'])){
   $m=$_GET['id'];
