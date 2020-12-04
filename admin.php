@@ -24,9 +24,9 @@ require_once('config.php');
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script><!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script> -->
-<script src="js/bootstrap.min.js"></script>
+<script src="cab/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="cab/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"><link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
@@ -58,12 +58,12 @@ require_once('config.php');
 </ul>
 <ul>
   <li><a href="admin.php?id=8" id="btn1" class="w3-bar-item w3-button">Location</a><ul>
-  <li><a href="admin.php?id=9" id="btn1" class="w3-bar-item w3-button">Location-List</a></li>
-  <li><a href="admin.php?id=15" id="btn1" class="w3-bar-item w3-button">Location-Approve</a></li>
+  <li><a href="admin.php?id=9" id="btn1" class="w3-bar-item w3-button">Approved-Location-List</a></li>
+  <li><a href="admin.php?id=15" id="btn1" class="w3-bar-item w3-button">Disapproved-Location-List</a></li>
   <li><a href="admin.php?id=10" id="btn1" class="w3-bar-item w3-button">Add Location</a></li></ul>
   </li>
-  <li><a href="admin.php?id=11" id="btn1" class="w3-bar-item w3-button">Account</a><ul>
-  <li><a href="admin.php?id=11" id="btn1" class="w3-bar-item w3-button">Change-Password</a></li></ul>
+  <li><a href="admin.php?id=111" id="btn1" class="w3-bar-item w3-button">Account</a><ul>
+  <li><a href="padmin.php?id=11" id="btn1" class="w3-bar-item w3-button">Change-Password</a></li></ul>
   </li>
 </ul>
 <ul>
@@ -88,7 +88,7 @@ echo "<center><h2>Welcome "
 <?php 
 if(isset($_GET['id'])){
   $m=$_GET['id'];
-  if($m==13||$m==1||$m==2||$m==3||$m==4||$m==5||$m==6||$m==7){
+  if($m==1||$m==2||$m==3||$m==4||$m==5||$m==6||$m==7){
     if($m==1 || $m==2||$m==3){
       $abc='<div class="select">
       <form action="" method="POST">
@@ -101,34 +101,36 @@ if(isset($_GET['id'])){
       </center>
       </form>';
     }
-    else{
-      $abc='<div class="select">
-      <form action="" method="POST">
-      <center>Your Choice  Our Filter :-<select name="filter" id="filter">
-         <option value="Select Value">Select Value</option>
-         <option value="fare">Filter by Total-fare</option>
-         <option value="date">Filter by Date</option>
-       
-      </select>
-      <input type="submit" value="submit" name="submit" class="submitt">
-      </center>
-      </form>';
-    }
-    if($m==13){
+    elseif($m==13){
       $abc='<div class="select">
       <form action="" method="POST">
       <center>Your Choice  Our Filter :-<select name="filter" id="filter">
       
          <option value="Select Value">Select Value</option>
-         <option value="name">Filter by Name</option>
-         <option value="fare">Filter by Total-fare</option>
-         <option value="date">Filter by Date</option>
+         <option value="name">Sort by Name</option>
+         <option value="fare">Sort by Total-fare</option>
+         <option value="date">Sort by Date</option>
        
       </select>
       <input type="submit" value="submit" name="submit" class="submitt">
       </center>
       </form>';
     }
+    else{
+      $abc='<div class="select">
+      <form action="" method="POST">
+      <center>Your Choice  Our Filter :-<select name="filter" id="filter">
+         <option value="Select Value">Select Value</option>
+         <option value="fare">Sort by Total-fare</option>
+         <option value="date">Sort by Date</option>
+         <option value="dist">Sort by Distance</option>
+       
+      </select>
+      <input type="submit" value="submit" name="submit" class="submitt">
+      </center>
+      </form>';
+    }
+  
       echo $abc;
  
    
@@ -141,7 +143,7 @@ if (isset($_POST['submit'])) {
    $obj3= new DB();
    $ab=new user();
    $filter=isset($_POST['filter'])?$_POST['filter']:'';
-  if($filter==1 || $filter=='fare'|| $filter=='date'){
+  if($filter==1 || $filter=='fare'|| $filter=='date'|| $filter=='dist'){
     $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th></tr><tr>";
     $ab->filterrr($a,$m,$filter,$obj3->conn);
   }
@@ -262,13 +264,13 @@ $obj3= new DB();
 $obj55=new admin();
 $a='f';
 $obj55->adm($a,$obj3->conn);
-echo '</div>';
+echo '</div></div>';
   }
   }
 
 ?>
 
-</div>
+
 <div class="w3-container" style="margin-bottom:30px;">
 <?php 
 require_once('class.php');
@@ -313,11 +315,11 @@ if($m==4||$m==5||$m==6||$m==7){
 }
 if($m==8||$m==9||$m==10||$m==15){
   if($m==8 || $m==9){
-    $a='<table><tr><th>Location-Name</th><th>Location-Distance from Charbagh</th><th>Route-Avaible</th><th>Approve</th></tr><tr>';
+    $a='<table><tr><th>Location-Name</th><th>Location-Distance from Charbagh</th><th>Route-Avaible</th><th>Action</th></tr><tr>';
     $obj4->ride3($a,$m,$obj3->conn);
   }
   if($m==15){
-    $a='<table><tr><th>Location-Name</th><th>Location-Distance from Charbagh</th><th>Route-Avaible</th><th>Approve</th></tr><tr>';
+    $a='<table><tr><th>Location-Name</th><th>Location-Distance from Charbagh</th><th>Route-Avaible</th><th>Action</th></tr><tr>';
     $obj4->ride3($a,$m,$obj3->conn);
   }
 
@@ -327,9 +329,31 @@ if($m==8||$m==9||$m==10||$m==15){
   }
 
 }
-if($m==11){
-  $a='<form action="" method="POST" class="form11"><center><h2>Change-Password</h2></center><div><p><label for ="user-name"><h3>User-Name</h3></label><input type ="text" id="user-name" class="user-name" name="username" value="admin"></p><p><label for ="pass2"><h3>New-Password</h3><input type ="password" id="pass2" class="pass2" name="pass"></label> </p><p><label for ="opass"><h3>Old-Password</h3></label><input type ="password" name="opass" id="opass" class="opass"><br><br><input type="submit" class="buttnn" name="submit" value="Submit"></div></form>';   
-  $obj4->ride4($a,$obj3->conn);
+
+// if($m==11){
+
+//   $a='<form action="" method="POST"  class="form11">';
+//   $a.='<center><h2>Update-Password</center></h2>';
+//   $a.='<div><p><label for ="user-name"><h3>User-Name</h3></label><input type ="text" id="user-name" class="user-name" name="username" value="'.$_SESSION['userdata']['username'].'" readonly></p>';
+//   $a.='<p><label for ="password"><h3>Old-Password</h3></label><input type ="password" id="password" class="password" name="opass"></p>';
+//   $a.='<p><label for ="password"><h3>New-Password</h3></label><input type ="password" id="password" class="password" name="pass"></p>';
+//   $a.='<br><br><p><input type="submit" class="buttn" name="submit" value="Submit"></p></div></center></form>'; 
+//   echo $a;
+//   $varr= $obj4->adm_Pass($obj3->conn);
+//   echo $varr;
+//   if($varr == 1)
+//   {
+//     header("location:login.php");
+//   }
+
+// }
+
+if($m==111)
+{
+  $obj3= new DB();
+   $ab=new user();
+  $a='<table><tr><th>User_id</th><th>Name</th><th>Contact</th><th>Date </th><th>username</th><th>E-mail</th><th>Action-1</th></tr><tr>';
+  $ab->form($a,$m,$obj3->conn);
 }
 if($m==12){
   session_destroy();
@@ -371,6 +395,7 @@ if($m==12){
 </div>
 </div>
 <script>
+ var count=0;
 function w3_open() {
   document.getElementById("main").style.marginLeft = "25%";
   document.getElementById("mySidebar").style.width = "25%";
@@ -389,10 +414,19 @@ function onlynumber(button) {
             return false; 
         return true; 
     } 
+   
     function alphaonly(button) { 
+     
+      console.log(count)
 	console.log(button.which);
         var code = button.which;
-        if ((code > 64 && code < 91) || (code < 123 && code > 96)|| (code==08)||(code < 58 && code > 47) )
+        if(count==0 && (code > 64 && code < 91) || (code < 123 && code > 96)|| (code==08)){
+          count++; 
+          return true;
+         
+         
+        }
+       else if ((code > 64 && code < 91) || (code < 123 && code > 96)|| (code==08)||(code < 58 && code > 47) && count>4)
             return true; 
         return false; 
     } 
@@ -461,6 +495,18 @@ body{
 .pass2{
   width:400px;
 }
+.b1{
+  color:red;
+}
+.a11{
+   color:red;
+ }
+ .form11{
+   padding-bottom:30px;
+   font-weight:bold;
+   padding-left:10px;
+ }
+ 
 </style>
 
 </body>

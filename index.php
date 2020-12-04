@@ -53,17 +53,12 @@ $obj5=new location();
 
 ?></a>
               </li>
+             
               <li class="nav-item">
-                <a href="login.php" class="nav-link ml-5 h5 mt-2">Dashboard</a>
+                <a href="signup.php" class="nav-link ml-5 h5 mt-2" style="color:red;">Sign-up</a>
               </li>
               <li class="nav-item">
-                <a href="login.php" class="nav-link ml-5 h5 mt-2">Previous-Ride</a>
-              </li>
-              <li class="nav-item">
-                <a href="login.php" class="nav-link ml-5 h5 mt-2">Accounts</a>
-              </li>
-              <li class="nav-item">
-                <a href="login.php" class="nav-link ml-5 h5 mt-2">Log-in</a>
+                <a href="login.php" class="nav-link ml-5 h5 mt-2" style="color:red;">Log-in</a>
               </li>
               <li class="nav-item">
                
@@ -134,7 +129,7 @@ $obj5=new location();
             <div class="input-group-prepend">
               <span class="input-group-text text_size" id="basic-addon1"  >Luggage</span>
             </div>
-            <input type="text" class="form-control abc3 new" placeholder="Enter Weight In KG" aria-label="Username" onkeypress="return onlynumber(event)" aria-describedby="basic-addon1">
+            <input type="text" class="form-control abc3 new" placeholder="Enter Weight In KG"  aria-label="Username" onkeypress="return onlynumber(event)" aria-describedby="basic-addon1">
 
           </div>
          <p class="error" ></p>

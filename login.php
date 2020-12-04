@@ -7,6 +7,7 @@
 
  if (isset($_POST['submit'])) {
     $username=isset($_POST['username'])?$_POST['username']:'';
+    $username=strtolower($username);
     $userpassword=isset($_POST['password'])?$_POST['password']:'';
     $obj4->admit($username,$userpassword,$obj3->conn);
  }
@@ -131,6 +132,13 @@ input{
 }
 #log{
 	text-decoration: none;
+}
+span{
+	border: 1px solid rgba(201, 219, 0, 1);
+	border-radius: 20px;
+	background-color: rgba(201, 219, 0, 1);
+	color: black;
+
 }
     </style>
 </body>

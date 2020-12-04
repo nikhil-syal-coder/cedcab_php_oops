@@ -28,8 +28,8 @@ require_once('config.php');
                  
         if ($count==0) {
 
-           $sql="INSERT INTO users (name, password, contact, date, username, boolean_admin, boolean_status) 
-            VALUES ('".$name."', '".md5($userpassword)."','".$phone."', current_timestamp(),'".$username."', 1, 0)"; 
+           $sql="INSERT INTO users (name, password, contact, date, username, boolean_admin, boolean_status,email) 
+            VALUES ('".$name."', '".md5($userpassword)."','".$phone."', current_timestamp(),'".$username."', 1, 0,'".$email."')"; 
            
     
         if ($conn->query($sql)===true) {
@@ -56,6 +56,8 @@ require_once('config.php');
                         while ($row= $result->fetch_assoc()) {
                             $_SESSION['userdata']=array("username"=>$row['username'],
                             "user_id"=>$row['user_id']);
+                            $_SESSION['name']=$row['name'];
+                            $_SESSION['phone']=$row['contact'];
                             if ($row['boolean_admin']==0 && $_SESSION['userdata']['username']=='admin') {
                                 header("Location: admin.php?id=13");
                             }
@@ -92,6 +94,7 @@ require_once('config.php');
            echo $f;
            $a='<table>';
             $result=$conn->query($sql);
+          
             if ($result->num_rows > 0) {
                
                 while ($row= $result->fetch_assoc()) {
@@ -214,7 +217,7 @@ require_once('config.php');
                     $a.='<td>'.$row['laugage'].'</td>';
                     $a.='<td>'.$row['status'].'</td>';
                     $a.='<td>'.$row['cab_type'].'</td>';
-                    $a.='<td><a href="user2.php?id='.$row['ride_id'].'00">Invoice</a></td></tr>';
+                    $a.='<td><a href="user2.php?id='.$row['ride_id'].'00" class="a11">Invoice</a></td></tr>';
                  
                 }
                 $a.='</table>';
@@ -265,31 +268,55 @@ if($m==3){
 
    function form($a,$m,$conn){
        if($m==4){
-    $abc='';
-    $name=$_SESSION['userdata']['username'];
-    $sql1="SELECT * FROM users WHERE `username`='".$name."'";
-    
-    $result=$conn->query($sql1);
-    
-    if ($result->num_rows > 0) {
-       echo '<center><h2>Personal-Details</h2></center>';
-      
-        while ($row= $result->fetch_assoc()) {
-            $a.='<td>'.$row['user_id'].'</td>';
-            $a.='<td>'.$row['name'].'</td>';
-            $a.='<td>'.$row['contact'].'</td>';
-            $a.='<td>'.$row['date'].'</td>';
-            $a.='<td>'.$row['username'].'</td>';
-            $a.='<td><a href="user.php?id=5" >Update-Details</a></td>';
-            $a.='<td><a href="user.php?id=6" >Update-Password</a></td></tr>';
-
-
-        
+        $abc='';
+            $name=$_SESSION['userdata']['username'];
+            $sql1="SELECT * FROM users WHERE `username`='".$name."'";
+            
+            $result=$conn->query($sql1);
+            
+            if ($result->num_rows > 0) {
+               echo '<center><h2>Personal-Details</h2></center>';
+              
+                while ($row= $result->fetch_assoc()) {
+                    $a.='<td>'.$row['user_id'].'</td>';
+                    $a.='<td>'.$row['name'].'</td>';
+                    $a.='<td>'.$row['contact'].'</td>';
+                    $a.='<td>'.$row['date'].'</td>';
+                    $a.='<td>'.$row['username'].'</td>';
+                    $a.='<td>'.$row['email'].'</td>';
+                    $a.='<td><a href="user.php?id=5" class="a11">Update-Details</a></td>';
+                  $a.='<td><a href="user.php?id=6" class="a11">Update-Password</a></td></tr>';
+                }
+                $a.='</table>';
+                echo $a;
+            }
         }
-        $a.='</table>';
-        echo $a;
-    }
-}
+        if($m==111){
+            $abc='';
+                $name=$_SESSION['userdata']['username'];
+                $sql1="SELECT * FROM users WHERE `username`='".$name."'";
+                
+                $result=$conn->query($sql1);
+                
+                if ($result->num_rows > 0) {
+                   echo '<center><h2>Personal-Details</h2></center>';
+                  
+                    while ($row= $result->fetch_assoc()) {
+                        $a.='<td>'.$row['user_id'].'</td>';
+                        $a.='<td>'.$row['name'].'</td>';
+                        $a.='<td>'.$row['contact'].'</td>';
+                        $a.='<td>'.$row['date'].'</td>';
+                        $a.='<td>'.$row['username'].'</td>';
+                        $a.='<td>'.$row['email'].'</td>';
+                        $a.='<td><a href="admin.php?id=11" class="a11" >Update-Password</a></td></tr>';
+                    }
+                    $a.='</table>';
+                    echo $a;
+                }
+            }
+       
+
+
 if($m==5){
     
     
@@ -312,9 +339,7 @@ if($m==5){
         }
 }        
 }  
-if($m==6){
-  
-
+if($m==6 || $m==11){
     $count=0;
     echo $a;
     if(isset($_POST['submit'])){
@@ -323,12 +348,16 @@ if($m==6){
         $oldpas=isset($_POST['pass'])?$_POST['opass']:'';
         $username=isset($_POST['username'])?$_POST['username']:'';
         $sql="SELECT * from `users` WHERE `password`='".md5($oldpas)."'";
+        if($name==$oldpas){
+            echo "<h2>Old password and New password should not be same</h2>";
+            $count++;
+        }
     
        
         $result=$conn->query($sql);
       
         if ($result->num_rows == 0) {
-            echo "Old password mismatch";
+            echo "<h2>Old password mismatch<h2>";
             $count++;
         }
         if($_SESSION['userdata']['username']==$username && $count==0){
@@ -397,6 +426,7 @@ if($m==6){
          echo '<center>'. $row['Total'];
 }
 
+
 function filterrr($a,$m,$filter,$conn){
     $abc='';
     $name=$_SESSION['userdata']['username'];
@@ -427,11 +457,7 @@ function filterrr($a,$m,$filter,$conn){
          ORDER BY total_fare DESC 
          LIMIT 0, 7";
         }
-        if($m==8){
-         $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."' AND `cab_type`='CedMini'
-         ORDER BY total_fare DESC 
-         LIMIT 0, 7";   
-        }
+     
      $result=$conn->query($sql);
      if ($result->num_rows > 0) {
         
@@ -465,11 +491,7 @@ function filterrr($a,$m,$filter,$conn){
          ORDER BY total_fare DESC 
          LIMIT 0, 7";
         }
-        if($m==8){
-         $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."' AND `cab_type`='CedMicro'
-         ORDER BY total_fare DESC 
-         LIMIT 0, 7";   
-        }
+    
      $result=$conn->query($sql);
      if ($result->num_rows > 0) {
         
@@ -504,11 +526,7 @@ function filterrr($a,$m,$filter,$conn){
          ORDER BY total_fare DESC 
          LIMIT 0, 7";
         }
-        if($m==8){
-         $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."' AND `cab_type`='Cedsuv'
-         ORDER BY total_fare DESC 
-         LIMIT 0, 7";   
-        }
+      
      $result=$conn->query($sql);
      if ($result->num_rows > 0) {
         
@@ -542,11 +560,7 @@ function filterrr($a,$m,$filter,$conn){
          ORDER BY total_fare DESC 
          LIMIT 0, 7";
         }
-        if($m==8){
-         $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."' AND `cab_type`='Cedroyal'
-         ORDER BY total_fare DESC 
-         LIMIT 0, 7";   
-        }
+     
      $result=$conn->query($sql);
      if ($result->num_rows > 0) {
         
@@ -580,17 +594,7 @@ function filterrr($a,$m,$filter,$conn){
         ORDER BY total_fare DESC 
         LIMIT 0, 7";
        }
-       if($m==8){
-        $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."'
-        ORDER BY total_fare DESC 
-        LIMIT 0, 7";   
-       }
-    //    if($m==13){
-    //     $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."'
-    //     ORDER BY total_fare DESC 
-    //     LIMIT 0, 7";
-    //    }
-   
+    
    
     $result=$conn->query($sql);
     if ($result->num_rows > 0) {
@@ -625,12 +629,7 @@ function filterrr($a,$m,$filter,$conn){
         ORDER BY total_fare DESC 
         LIMIT 0, 30";
        }
-       if($m==8){
-        $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."'
-        ORDER BY total_fare DESC 
-        LIMIT 0, 30";   
-       }
-
+     
     $result=$conn->query($sql);
     if ($result->num_rows > 0) {
        
@@ -662,11 +661,7 @@ function filterrr($a,$m,$filter,$conn){
         $sql="SELECT * FROM ride WHERE `status`='pending' AND `customer_id`='".$abc."'
         ORDER BY total_fare ASC ";
        }
-       if($m==8){
-        $sql="SELECT * FROM ride  WHERE `customer_id`='".$abc."'
-        ORDER BY total_fare ASC ";   
-       }
-
+     
   
     $result=$conn->query($sql);
     if ($result->num_rows > 0) {
@@ -702,12 +697,7 @@ function filterrr($a,$m,$filter,$conn){
         ORDER BY `name` DESC 
         LIMIT 0, 7";
        }
-       if($m==13){
-        $sql="SELECT * FROM users WHERE `boolean_admin`='1'
-        ORDER BY `name` DESC 
-        LIMIT 0, 7";
-       }
-      
+       
  
     $result=$conn->query($sql);
     if ($result->num_rows > 0) {
@@ -724,7 +714,76 @@ function filterrr($a,$m,$filter,$conn){
     }
 
    }
+   if($filter=='dist'){
+    if($m==4){
+     $sql="SELECT * FROM ride
+     ORDER BY total_distance ASC ";  
+    }
+    
+    if($m==5){
+     $sql="SELECT * FROM ride WHERE `status`='active'
+     ORDER BY total_distance ASC ";
+    }
+    if($m==6){
+     $sql="SELECT * FROM ride WHERE `status`='pending'
+     ORDER BY total_distance ASC ";
+    }
+    if($m==7){
+     $sql="SELECT * FROM ride WHERE `status`='cancelled'
+     ORDER BY total_distance ASC ";
+    }
+  
+ $result=$conn->query($sql);
+ if ($result->num_rows > 0) {
+    
+     while ($row= $result->fetch_assoc()) {
+         $a.='<td>'.$row['ride_id'].'</td>';
+         $a.='<td>'.$row['ride_date'].'</td>';
+         $a.='<td>'.$row['pickup'].'</td>';
+         $a.='<td>'.$row['drop'].'</td>';
+         $a.='<td>'.$row['total_distance'].'</td>';
+         $a.='<td>'.$row['total_fare'].'</td>';
+         $a.='<td>'.$row['laugage'].'</td></tr>';
+     }
+     $a.='</table>';
+     echo $a;
+ }
 
+}
+if($filter=='distance'){
+    if($m==1){
+     $sql="SELECT * FROM ride
+     ORDER BY total_distance ASC ";  
+    }
+    
+    if($m==2){
+     $sql="SELECT * FROM ride WHERE `status`='active'
+     ORDER BY total_distance ASC ";
+    }
+    if($m==3){
+     $sql="SELECT * FROM ride WHERE `status`='pending'
+     ORDER BY total_distance ASC ";
+    }
+   
+  
+ $result=$conn->query($sql);
+ if ($result->num_rows > 0) {
+    
+     while ($row= $result->fetch_assoc()) {
+         $a.='<td>'.$row['ride_id'].'</td>';
+         $a.='<td>'.$row['ride_date'].'</td>';
+         $a.='<td>'.$row['pickup'].'</td>';
+         $a.='<td>'.$row['drop'].'</td>';
+         $a.='<td>'.$row['total_distance'].'</td>';
+         $a.='<td>'.$row['total_fare'].'</td>';
+         $a.='<td>'.$row['cab_type'].'</td>';
+         $a.='<td>'.$row['laugage'].'</td></tr>';
+     }
+     $a.='</table>';
+     echo $a;
+ }
+
+}
    if($filter=='fare'){
        if($m==4){
         $sql="SELECT * FROM ride
@@ -739,13 +798,10 @@ function filterrr($a,$m,$filter,$conn){
         ORDER BY total_fare ASC ";
        }
        if($m==7){
-        $sql="SELECT * FROM ride WHERE `status`='block'
+        $sql="SELECT * FROM ride WHERE `status`='cancelled'
         ORDER BY total_fare ASC ";
        }
-       if($m==13){
-        $sql="SELECT * FROM ride
-        ORDER BY total_fare ASC ";  
-       }
+    
  
     $result=$conn->query($sql);
     if ($result->num_rows > 0) {
@@ -778,14 +834,10 @@ function filterrr($a,$m,$filter,$conn){
         ORDER BY total_fare DESC ";
        }
        if($m==7){
-        $sql="SELECT * FROM ride WHERE `status`='block'
+        $sql="SELECT * FROM ride WHERE `status`='cancelled'
         ORDER BY total_fare DESC ";
        }
-       if($m==13){
-        $sql="SELECT * FROM ride
-        ORDER BY total_fare DESC ";  
-       }
-   
+     
     $result=$conn->query($sql);
     if ($result->num_rows > 0) {
        
@@ -805,11 +857,7 @@ function filterrr($a,$m,$filter,$conn){
    }
 
 }
-
-   
  }
-
-
 class admin{
     
     function ride_status2($myyy,$conn){
@@ -818,7 +866,7 @@ class admin{
         if ($result->num_rows > 0) {
           $row= $result->fetch_assoc();
           if($row['status']=='pending'){
-          $sql1="UPDATE `ride` SET `status`= 'block'  WHERE `ride_id`='".$myyy."'";
+          $sql1="UPDATE `ride` SET `status`= 'cancelled'  WHERE `ride_id`='".$myyy."'";
           $result=$conn->query($sql1);
           header("Location:admin.php?id=4");
         }
@@ -849,17 +897,12 @@ class admin{
         $result=$conn->query($sql1);
         header("Location:admin.php?id=4");
 }
-
-
 }
-   
-
 }
-
 
 function ride( $a,$m,$conn){
     if($m==1){
-        echo "<span  class='bb'>Boolean_status is 0 for-<span class='bbb'> Non-Approved-User</span></span><br><span  class='bb'>Boolean_status is 1 for-<span class='bbb'> Approved-User</span></span>"; 
+     
         echo "<center><h2>User</h2></center><center>";
         $sql1="SELECT * from users where `boolean_admin`='1'";
         $result=$conn->query($sql1);
@@ -869,12 +912,9 @@ function ride( $a,$m,$conn){
         $a.='<td>'.$row['username'].'</td>';
         $a.='<td>'.$row['user_id'].'</td>';
         $a.='<td>'.$row['contact'].'</td>';
-        $a.='<td>'.$row['boolean_status'].'</td>';
-        $a.='<td><a href="update4.php?id='.$row['user_id'].'">toggle</a></td></tr>';
-        
-   
-        
-
+        $a.=($row['boolean_status']==1)?('<td>Approved-User</td>'):('<td>Non-Approved-User</td>');
+        $a.='<td><a href="update4.php?id='.$row['user_id'].'" class="a11" >Approved/Disapproved-User</a></td></tr>';
+     
     }
     $a.='</table>';
     echo $a;
@@ -882,7 +922,7 @@ function ride( $a,$m,$conn){
 
     }
 if($m==2){
-    echo "<span  class='bb'>Boolean_status is 0 for-<span class='bbb'> Non-Approved-User</span></span><br><span  class='bb'>Boolean_status is 1 for-<span class='bbb'> Approved-User</span></span>"; 
+   
     echo "<center><h2>Approved </h2><h3>User</h3></center><center>";
     $sql1="SELECT * from users Where `boolean_status`='1' AND  `boolean_admin`='1'";
     $result=$conn->query($sql1);
@@ -892,9 +932,7 @@ if($m==2){
     $a.='<td>'.$row['username'].'</td>';
     $a.='<td>'.$row['user_id'].'</td>';
     $a.='<td>'.$row['contact'].'</td>';
-    $a.='<td>'.$row['boolean_status'].'</td></tr>';
-
-    
+    $a.=($row['boolean_status']==1)?('<td>Approved-User</td></tr>'):('<td>Non-Approved-User</td></tr>');
 
 }
 $a.='</table>';
@@ -902,7 +940,7 @@ echo $a;
 }
 }
 if($m==3){
-    echo "<span  class='bb'>Boolean_status is 0 for-<span class='bbb'> Non-Approved-User</span></span><br><span  class='bb'>Boolean_status is 1 for-<span class='bbb'> Approved-User</span></span>"; 
+  
     echo "<center><h2>Pending </h2><h3>User</h3></center><center>";
     $sql1="SELECT * from users Where `boolean_status`='0' ";
     $result=$conn->query($sql1);
@@ -912,7 +950,7 @@ if($m==3){
     $a.='<td>'.$row['username'].'</td>';
     $a.='<td>'.$row['user_id'].'</td>';
     $a.='<td>'.$row['contact'].'</td>';
-    $a.='<td>'.$row['boolean_status'].'</td></tr>';
+    $a.=($row['boolean_status']==1)?('<td>Approved-User</td></tr>'):('<td>Non-Approved-User</td></tr>');
  
 }
 $a.='</table>';
@@ -941,14 +979,8 @@ function loct($uid,$conn){
             }
         }
     }
-
-
-
-    $sql="UPDATE `location` SET `is_avb`='1' WHERE `id`='".$uid."'";
- 
-}
-
-
+ $sql="UPDATE `location` SET `is_avb`='1' WHERE `id`='".$uid."'";
+ }
 function pending($m,$conn){
     $sql1="SELECT * from users Where `user_id`='".$m."' ";
     $result=$conn->query($sql1);
@@ -972,9 +1004,7 @@ function ride2($a,$m,$conn){
     if($m==4){
         echo "<center><h2>User</h2><h3>Ride</h3></center><center>";
         $sql1="SELECT * from ride";
-        
         $result=$conn->query($sql1);
-     
         if ($result->num_rows > 0) {
         while ($row= $result->fetch_assoc()) {
         $a.='<td>'.$row['ride_id'].'</td>';
@@ -985,8 +1015,8 @@ function ride2($a,$m,$conn){
         $a.='<td>'.$row['total_fare'].'</td>';
         $a.='<td>'.$row['laugage'].'</td>';
         $a.='<td>'.$row['status'].'</td>';
-        $a.='<td><a href="update2.php?id='.$row['ride_id'].'">Update</a></td>';
-        $a.='<td><a href="update3.php?id='.$row['ride_id'].'">Cancel</a></td></tr>';
+        $a.='<td><a href="update2.php?id='.$row['ride_id'].'" class="a11">Approve-Ride</a></td>';
+        $a.='<td><a href="update3.php?id='.$row['ride_id'].'" class="a11">Cancel-Ride</a></td></tr>';
     }
     $a.='</table>';
     echo $a;
@@ -994,12 +1024,9 @@ function ride2($a,$m,$conn){
     }
 if($m==5){
     echo "<center><h2>Approved</h2><h3>Ride</h3></center><center>";
-  
-    $sql1="SELECT * from ride Where `status`='active'";
-    
-    $result=$conn->query($sql1);
- 
-    if ($result->num_rows > 0) {
+   $sql1="SELECT * from ride Where `status`='active'";
+   $result=$conn->query($sql1);
+  if ($result->num_rows > 0) {
     while ($row= $result->fetch_assoc()) {
     $a.='<td>'.$row['ride_id'].'</td>';
     $a.='<td>'.$row['ride_date'].'</td>';
@@ -1017,12 +1044,9 @@ echo $a;
 }
 if($m==6){
     echo "<center><h2>Pending </h2><h3>Ride</h3></center><center>";
-  
-    $sql1="SELECT * from ride Where `status`='pending'";
-    
+     $sql1="SELECT * from ride Where `status`='pending'";
     $result=$conn->query($sql1);
- 
-    if ($result->num_rows > 0) {
+  if ($result->num_rows > 0) {
     while ($row= $result->fetch_assoc()) {
     $a.='<td>'.$row['ride_id'].'</td>';
     $a.='<td>'.$row['ride_date'].'</td>';
@@ -1032,8 +1056,8 @@ if($m==6){
     $a.='<td>'.$row['total_fare'].'</td>';
     $a.='<td>'.$row['laugage'].'</td>';
     $a.='<td>'.$row['status'].'</td>';
-    $a.='<td><a href="update2.php?id='.$row['ride_id'].'">Update</a></td>';
-    $a.='<td><a href="update3.php?id='.$row['ride_id'].'">Cancel</a></td></tr>';
+    $a.='<td><a href="update2.php?id='.$row['ride_id'].'" class="a11">Approve-Ride</a></td>';
+    $a.='<td><a href="update3.php?id='.$row['ride_id'].'" class="a11">Cancel-Ride</a></td></tr>';
 }
 $a.='</table>';
 echo $a;
@@ -1044,7 +1068,7 @@ echo $a;
 
 if($m==7){
     echo "<center><h2>Cancel</h2><h3>Ride</h3></center><center>";
-   $sql1="SELECT * from ride Where `status`='block'";
+   $sql1="SELECT * from ride Where `status`='cancelled'";
     $result=$conn->query($sql1);
    if ($result->num_rows > 0) {
     while ($row= $result->fetch_assoc()) {
@@ -1066,17 +1090,15 @@ echo $a;
 }
 function ride3($a,$m,$conn){
     if($m==8 || $m==9){
-        echo "<span  class='bb'>is_avb is 0 for-<span class='bbb'> Non-Working-Route</span></span><br><span  class='bb'>is_avb is 1 for-<span class='bbb'> Currently-Working-Route</span></span>"; 
         echo "<center><h2>Location</h2></center><center>";
-      
-        $sql1="SELECT * from `location` WHERE `is_avb`='1' ";
+       $sql1="SELECT * from `location` WHERE `is_avb`='1' ";
         $result=$conn->query($sql1);
         if ($result->num_rows > 0) {
             while ($row= $result->fetch_assoc()) {
                 $a.='<td>'.$row['location_name'].'</td>';
                 $a.='<td>'.$row['distance'].'</td>';
-                $a.='<td>'.$row['is_avb'].'</td>';
-                $a.='<td><a href="update6.php?id='.$row['id'].'">Action</a></td></tr>';
+                $a.=($row['is_avb']==1)?('<td>Working-Location</td>'):('<td>Non-Working-Location</td>');
+                $a.='<td><a href="update6.php?id='.$row['id'].'" class="b1">Disapprove</a></td></tr>';
         
         }
         $a.='</table>';
@@ -1085,68 +1107,62 @@ function ride3($a,$m,$conn){
 
     }
     if($m==15){
-        echo "<span  class='bb'>is_avb is 0 for-<span class='bbb'> Non-Working-Route</span></span><br><span  class='bb'>is_avb is 1 for-<span class='bbb'> Currently-Working-Route</span></span>"; 
         echo "<center><h2>Location</h2></center><center>";
-      
-        $sql1="SELECT * from `location` WHERE `is_avb`='0' ";
+       $sql1="SELECT * from `location` WHERE `is_avb`='0' ";
         $result=$conn->query($sql1);
         if ($result->num_rows > 0) {
             while ($row= $result->fetch_assoc()) {
                 $a.='<td>'.$row['location_name'].'</td>';
                 $a.='<td>'.$row['distance'].'</td>';
-                $a.='<td>'.$row['is_avb'].'</td>';
-                $a.='<td><a href="update6.php?id='.$row['id'].'">Update</a></td></tr>';
-        
-        }
+                $a.=($row['is_avb']==1)?('<td>Working-Location</td>'):('<td>Non-Working-Location</td>');
+                $a.='<td><a href="update6.php?id='.$row['id'].'" class="b1">Approved</a></td></tr>';
+       }
         $a.='</table>';
         echo $a;
         }
 
     }
-
-
-
-
-
     if($m==10){
      echo $a;
     if(isset($_POST['submit'])){
-
-  
     $a= $_POST['distance'];
     $b=$_POST['location'];
- 
-    $sql="INSERT INTO `location` (`id`, `location_name`, `distance`, `is_avb`) VALUES (NULL, '".$b."', '".$a."', '0');";
+   $sql="INSERT INTO `location` (`id`, `location_name`, `distance`, `is_avb`) VALUES (NULL, '".$b."', '".$a."', '0');";
     $result=$conn->query($sql);
 
     } 
 }
 }
-function ride4($a,$conn){
-   $count=0;
-    echo $a;
+function adm_Pass($conn){
+       $count=0;
+    //    echo $a;
     if(isset($_POST['submit'])){
-
-  
         $a= $_POST['username'];
         $b=$_POST['opass']; 
         $c=$_POST['pass'];
         $sql1="SELECT * FROM users WHERE `boolean_admin`='0' AND `password`='".md5($b)."' ";
-        $result=$conn->query($sql1);
-        if ($result->num_rows == 0) {
-            echo "Old Password Mismatch";
-            $count++;
-        }
-        if($count==0){
-        $sql="UPDATE  `users`  SET  `password`= '".md5($c)."' WHERE  `username`='".$a."' AND   `contact` = '".$b."' "; 
-        $result=$conn->query($sql);
-        session_destroy();
-        header("Location:login.php");
-        }
-
+      
+                $result=$conn->query($sql1);
+                if ($result->num_rows == 0) {
+                    echo "<h2>Old Password Mismatch</h2>";
+                    $count++;
+                }
+                if($b==$c){
+                                echo "<h2>Old password and New password should not be same</h2>";
+                                $count++;  
+                            }
+               if($count==0){
+                            $sql="UPDATE  `users`  SET  `password`= '".md5($c)."' WHERE  `username`='".$a."' AND   `password` = '".md5($b)."' "; 
+                            $result=$conn->query($sql);
+                           
+                        //  echo '<h2>your password has been changed</h2>';
+                    return 1;
+                            //  header("location:login.php");
+                            }
+}
 }
 
-}
+
 function adm($a,$conn){
     if($a=='a'){
         $sql="SELECT COUNT(user_id) As Total from users";
@@ -1179,16 +1195,13 @@ function adm($a,$conn){
          echo '='. $row['Total'];
     }
     if($a=='f'){
-        $sql="SELECT COUNT(total_fare) As Total from ride WHERE `status`='block'";
+        $sql="SELECT COUNT(total_fare) As Total from ride WHERE `status`='cancelled'";
         $result=$conn->query($sql);
         $row= $result->fetch_assoc();
          echo '='.$row['Total'];
     }
 }
-
 }
-
-
 class location{
     function pickup($conn){
            $sql="SELECT * from `location` WHERE `is_avb`='1'";
@@ -1198,28 +1211,18 @@ class location{
               $a='<option value="'.$row['location_name'].'">'.$row['location_name'].'</option>';
               echo $a;
               }
-             
             }
-
-    }
+ }
     function array($conn){
-       
         $cabby2=array();
         $sql="SELECT * FROM `location` WHERE `is_avb`='1'";
         $result=$conn->query($sql);
           if ($result->num_rows > 0) {
           while ($row= $result->fetch_assoc()) { 
               $cabby2[$row['location_name']]=$row['distance'];
-              
-            
           }
-         
          return ( $cabby2);
-        
-          }
         }
-    
-}
-
-
+        }
+    }
 ?>

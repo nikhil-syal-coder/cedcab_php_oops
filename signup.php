@@ -21,9 +21,9 @@ if (isset($_POST['submit'])) {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script><!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script> -->
-<script src="js/bootstrap.min.js"></script>
+<script src="cab/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="cab/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"><link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
@@ -47,7 +47,9 @@ Register
               <li class="nav-item">
                 <a href="login.php" class="nav-link ml-5 h5 mt-2" style="color:red; font-size:1.5em;">Log-in</a>
               </li>
-            
+              <li class="nav-item">
+                <a href="index.php" class="nav-link ml-5 h5 mt-2" style="color:red; font-size:1.5em;">Book A Cab</a>
+              </li>
             </ul>
           </div>     
         </nav>
@@ -62,13 +64,13 @@ Register
 <label for="name">Name: <input type="text" name="name" class="name"   onkeydown="return alphaonly(event);" required></label>
 </p>    
 <p>
-<label for="username">Username: <input type="text" name="username"  class= "user" required></label>
+<label for="username">Username: <input type="text" name="username" onkeydown="return alphaonly2(event);" class= "user" required></label>
 </p>
 <p>
-<label for="password">Password: <input type="password" name="password" class="pass1" required></label>
+<label for="password">Password: <input type="password" name="password" class="pass1" onkeydown="return alphaonly2(event);" required></label>
 </p>
 <p>
-<label for="password2">Re-Password: <input type="password" class="pass" name="password2" required></label>
+<label for="password2">Re-Password: <input type="password" class="pass" name="password2" onkeydown="return alphaonly2(event);"  required></label>
 </p>
 <p>
 <label for="email">Email: <input type="email" name="email" class="email" required></label>
@@ -79,6 +81,7 @@ Register
 <p>
 <input type="submit" id="sub" name="submit" class="btn" value="Submit">
 </p>
+<p style="color:red;">Already a customer <i><a href="login.php"><u>Login</u></a></i></p>
 </form>
 </center>
 </div>
@@ -126,6 +129,13 @@ function alphaonly(button) {
 
         var code = button.which;
         if (code > 31 && (code < 48 || code > 57)) 
+            return false; 
+        return true; 
+    } 
+    function alphaonly2(button) { 
+	console.log(button.which);
+        var code = button.which;
+        if (code==32)
             return false; 
         return true; 
     } 
@@ -188,6 +198,13 @@ input{
 }
 .phone{
     margin-left:16px;  
+}
+span{
+	border: 1px solid rgba(201, 219, 0, 1);
+	border-radius: 20px;
+	background-color: rgba(201, 219, 0, 1);
+	color: black;
+
 }
 
 </style>

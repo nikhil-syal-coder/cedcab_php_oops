@@ -80,7 +80,7 @@ echo "<center><h2>Welcome "
 <?php 
 if(isset($_GET['id'])){
   $m=$_GET['id'];
-  if($m==8 || $m==1 || $m==2||$m==3){
+  if($m==1 || $m==2||$m==3){
 $abc='<div class="select">
 <form action="" method="POST">
 <center>Your Choice  Our Filter :-<select name="filter" id="filter">
@@ -91,7 +91,8 @@ $abc='<div class="select">
    <option value="micro">Rides in Cedmicro</option>
    <option value="royal">Rides in Cedroyal</option>
    <option value="suv">Rides in Cedsuv</option>
-   <option value="1">Sorting Fare</option>
+   <option value="distance">Sorting by Distance </option>
+   <option value="1">Sorting by Fare</option>
  
 </select>
 <input type="submit" value="Submit" name="submit" class="submitt">
@@ -184,7 +185,7 @@ echo '</div>';
 </div>
 
 <div class="w3-container abc" style="
-    margin-bottom: 90px;
+    margin-bottom: 130px;
 ">
 <?php 
 require_once('class.php');
@@ -215,24 +216,24 @@ if(isset($_GET['id'])){
   }
 if($m==4 || $m==5 || $m==6){
   if($m==4){
-    $a='<table><tr><th>User_id</th><th>Name</th><th>Contact</th><th>Date </th><th>username</th><th>Action-1</th><th>Action-2</th></tr><tr>';
+    $a='<table><tr><th>User_id</th><th>Name</th><th>Contact</th><th>Date </th><th>username</th><th>E-mail</th><th>Action-1</th><th>Action-2</th></tr><tr>';
     $obj5->form($a,$m,$obj3->conn);
   }
   if($m==5){
     $a='<form action="" method="POST" class="form11">';
     $a.='<center><h2>Update-Details</h2></center>';
-    $a.='<div><label for ="user-name">User-Name-</label><input type ="text" id="user-name" class="user-name a" name="username" value="my"></div><br>';
-    $a.='<div><label for ="name">Name-</label><input type ="text" id="name" class="namee b" name="name"  onkeydown="return alphaonly(event);"></div><br>';
-    $a.='<div></label> <label for ="Phone">Phone-</label><input type ="text" onkeypress="return onlynumber(event)" name="phone" id="phone"  class="phone c"></div><br>';
+    $a.='<div><label for ="user-name">User-Name-</label><input type ="text" id="user-name" class="user-name a" name="username" value="'.$_SESSION['userdata']['username'].'" readonly ></div><br>';
+    $a.='<div><label for ="name">Name-</label><input type ="text" id="name" class="namee b" name="name" value="'.$_SESSION['name'].'"  onkeydown="return alphaonly(event);"></div><br>';
+    $a.='<div></label> <label for ="Phone">Phone-</label><input type ="text" onkeypress="return onlynumber(event)" value="'.$_SESSION['phone'].'" name="phone" id="phone"  class="phone c"></div><br>';
     $a.='<div><input type="submit" class="buttnn" name="submit" value="Submit"></div></form>';   
     $obj5->form($a,$m,$obj3->conn);
   }
   if($m==6){
     $a='<form action="" method="POST"  class="form11">';
     $a.='<center><h2>Update-Password</center></h2>';
-    $a.='<div><p><label for ="user-name"><h3>User-Name</h3></label><input type ="text" id="user-name" class="user-name" name="username" value="my"></p>';
-    $a.='<p><label for ="password"><h3>New-Password</h3><input type ="text" id="password" class="password" name="pass"></p>';
-    $a.='<p><label for ="password"><h3>Old-Password</h3><input type ="text" id="password" class="password" name="opass"><br></p>';
+    $a.='<div><p><label for ="user-name"><h3>User-Name</h3></label><input type ="text" id="user-name" class="user-name" name="username" value="'.$_SESSION['userdata']['username'].'" readonly></p>';
+    $a.='<p><label for ="password"><h3>Old-Password</h3><input type ="password" id="password" class="password" name="opass"><br></p>';
+    $a.='<p><label for ="password"><h3>New-Password</h3><input type ="password" id="password" class="password" name="pass"></p>';
     $a.='<p><input type="submit" class="buttn" name="submit" value="Submit"></p></div></center></form>'; 
     $obj5->form($a,$m,$obj3->conn);
   }
@@ -365,6 +366,9 @@ label{
    padding-bottom:30px;
    font-weight:bold;
    padding-left:10px;
+ }
+ .a11{
+   color:red;
  }
  
 </style>
