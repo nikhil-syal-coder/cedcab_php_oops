@@ -928,7 +928,8 @@ function filterrr($a,$m,$filter,$conn){
          $a.='<td>'.$row['drop'].'</td>';
          $a.='<td>'.$row['total_distance'].'</td>';
          $a.='<td>'.$row['total_fare'].'</td>';
-         $a.='<td>'.$row['laugage'].'</td></tr>';
+         $a.='<td>'.$row['laugage'].'</td>';
+         $a.='<td>'.$row['cab_type'].'</td></tr>';
      }
      $a.='</table>';
      echo $a;
@@ -998,7 +999,8 @@ if($filter=='distance'){
             $a.='<td>'.$row['drop'].'</td>';
             $a.='<td>'.$row['total_distance'].'</td>';
             $a.='<td>'.$row['total_fare'].'</td>';
-            $a.='<td>'.$row['laugage'].'</td></tr>';
+            $a.='<td>'.$row['laugage'].'</td>';
+            $a.='<td>'.$row['cab_type'].'</td></tr>';
         }
         $a.='</table>';
         echo $a;
@@ -1033,7 +1035,8 @@ if($filter=='distance'){
             $a.='<td>'.$row['drop'].'</td>';
             $a.='<td>'.$row['total_distance'].'</td>';
             $a.='<td>'.$row['total_fare'].'</td>';
-            $a.='<td>'.$row['laugage'].'</td></tr>';
+            $a.='<td>'.$row['laugage'].'</td>';
+            $a.='<td>'.$row['cab_type'].'</td></tr>';
         }
         $a.='</table>';
         echo $a;

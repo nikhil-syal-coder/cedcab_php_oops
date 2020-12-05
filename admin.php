@@ -115,7 +115,7 @@ if(isset($_GET['id'])){
       </select>
       <input type="submit" value="submit" name="submit" class="submitt">
       </center>
-      <center>Your Choice  Our Filter :-<select name="filter" id="filter">
+      <center>Your Choice  Our Filter :-<select name="filter2" id="filter2">
       <option value="Select Value">Select Value</option>
       <option value="minii">Filter By Cedmini</option>
       <option value="microo">Filter By Cedmicro</option>
@@ -123,7 +123,7 @@ if(isset($_GET['id'])){
       <option value="suvv">Filter By Cedsuv</option>
     
    </select>
-   <input type="submit" value="Sorting" name="submit" class="submitt">
+   <input type="submit" value="Sorting" name="submitt" class="submitt">
    </center>
       </form>';
     }
@@ -134,7 +134,7 @@ if(isset($_GET['id'])){
   }
 }
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit']) ) {
   require_once('class.php');
   require_once('config.php');
    $obj3= new DB();
@@ -143,19 +143,37 @@ if (isset($_POST['submit'])) {
   if($filter==1 || $filter=='fare'|| $filter=='date'|| $filter=='dist'||$filter=='microo'|| $filter=='minii'|| $filter=='suvv'|| $filter=='royall'){
     $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Cab-type</th></tr><tr>";
     $ab->filterrr($a,$m,$filter,$obj3->conn);
+    echo $filter;
   }
   else{
-
+echo $filter;
+  
+  $a='<table><tr><th>User_id</th><th>Name</th><th>Contact</th><th>Date </th><th>username</th></tr><tr>';
+  $ab->filterrr($a,$m,$filter,$obj3->conn);
+  }
+}
+if (isset($_POST['submitt'])) {
+  require_once('class.php');
+  require_once('config.php');
+   $obj3= new DB();
+   $ab=new user();
+   $filter=isset($_POST['filter2'])?$_POST['filter2']:'';
+  if($filter==1 || $filter=='fare'|| $filter=='date'|| $filter=='dist'||$filter=='microo'|| $filter=='minii'|| $filter=='suvv'|| $filter=='royall'){
+    $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Cab-type</th></tr><tr>";
+    $ab->filterrr($a,$m,$filter,$obj3->conn);
+    echo $filter;
+  }
+  else{
+echo $filter;
   
   $a='<table><tr><th>User_id</th><th>Name</th><th>Contact</th><th>Date </th><th>username</th></tr><tr>';
   $ab->filterrr($a,$m,$filter,$obj3->conn);
   }
 }
 
-
 ?>
 
-</div>
+
 
   <?php
 if(isset($_GET['id'])){

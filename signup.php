@@ -121,7 +121,7 @@ Register
 function alphaonly(button) { 
 	console.log(button.which);
         var code = button.which;
-        if ((code > 64 && code < 91) || (code < 123 && code > 96)|| (code==08)) 
+        if ((code > 64 && code < 91) || (code < 123 && code > 96)|| (code==08)||(code==09)) 
             return true; 
         return false; 
     } 
@@ -131,7 +131,12 @@ function alphaonly(button) {
         if (code > 31 && (code < 48 || code > 57)) 
             return false; 
         return true; 
+        var myval = $(this).val();
+    
     } 
+    
+     
+
     function alphaonly2(button) { 
 	console.log(button.which);
         var code = button.which;
@@ -139,6 +144,16 @@ function alphaonly(button) {
             return false; 
         return true; 
     } 
+
+$("input[name=phone]").on("blur", function(e){
+     var myval = $(this).val();
+ 
+     if(myval.length < 10) {
+          alert("Value must contain 10 characters.");
+          $(this).unfocus();
+     }
+});
+   
 </script>
 </body>
 <style>

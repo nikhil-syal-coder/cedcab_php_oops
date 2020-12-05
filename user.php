@@ -87,22 +87,12 @@ $abc='<div class="select">
    <option value="Select Value">Select Value</option>
    <option value="7">Rides in 7 days</option>
    <option value="30">Rides in 30 days</option>
-   
    <option value="distance">Sorting by Distance </option>
    <option value="1">Sorting by Fare</option></center>
  
 </select>
 <input type="submit" value="Sorting" name="submit" class="submitt">
 <br>
-<center>Filter by your choice : :-<select name="filter" id="filter">
-   <option value="Select Value">Select Value</option>
-
-   <option value="mini">Rides in Cedmini</option>
-   <option value="micro">Rides in Cedmicro</option>
-   <option value="royal">Rides in Cedroyal</option>
-   <option value="suv">Rides in Cedsuv</option></center>
-</select>
-<input type="submit" value="Filter" name="submit" class="submitt">
 
 
 </form>';
@@ -112,12 +102,38 @@ $abc='<div class="select">
 
   }
 }
-if (isset($_POST['submit'])) {
+if(isset($_GET['id'])){
+  $m=$_GET['id'];
+
+  if($m==1 || $m==2||$m==3){
+$abc='<div class="select">
+<form action="" method="POST">
+
+<center>Filter by your choice : :-<select name="filter" id="filter2">
+   <option value="Select Value">Select Value</option>
+   <option value="mini">Rides in Cedmini</option>
+   <option value="micro">Rides in Cedmicro</option>
+   <option value="royal">Rides in Cedroyal</option>
+   <option value="suv">Rides in Cedsuv</option></center>
+</select>
+<input type="submit" value="Filter" name="submitt" class="submitt">
+<br>
+
+
+</form>';
+  
+  echo $abc;
+ 
+
+  }
+}
+if (isset($_POST['submit']) || isset($_POST['submitt']) ) {
   require_once('class.php');
   require_once('config.php');
    $obj3= new DB();
    $ab=new user();
   $filter=isset($_POST['filter'])?$_POST['filter']:'';
+ 
 
     $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Cab-Name</th><th>Laugage</th></tr><tr>";
     $ab->filterrr($a,$m,$filter,$obj3->conn);
@@ -302,7 +318,7 @@ function w3_close() {
 function alphaonly(button) { 
 	console.log(button.which);
         var code = button.which;
-        if ((code > 64 && code < 91) || (code < 123 && code > 96)|| (code==08)) 
+        if ((code > 64 && code < 91) || (code < 123 && code > 96)|| (code==08)||(code==09)) 
             return true; 
         return false; 
     } 
