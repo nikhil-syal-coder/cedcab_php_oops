@@ -67,7 +67,11 @@ if(isset($_GET['id'])){
        
         if($varr == 1)
         {
-          header("location:login.php");
+         
+            session_destroy();
+            echo "<script>alert('Your Password has been Changed');
+            window.location.href='login.php';</script>";
+       
         }
       
       }
