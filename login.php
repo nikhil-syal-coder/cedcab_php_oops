@@ -53,12 +53,12 @@
             <h2>Login</h2><br>
             <form action="" method="POST">
                 <p>
-                    <label for="username">Username: <input type="text"
+                    <label for="username">Username: <input type="text" class="lugwt"
                      name="username" required></label>
                 </p>
                 <p>
                     <label for="password">Password: <input type="password"
-                     name="password" required></label>
+                     name="password" class="lugwt" required></label>
                 </p>
                 <p>
                     <input id="login" type="submit" name="submit" value="Login">
@@ -141,6 +141,13 @@ span{
 
 }
     </style>
+    <script>
+        
+   $('.lugwt').on("cut copy paste drag drop",function(e) {
+    e.preventDefault();
+    });
+
+    </script>
 </body>
 
 </html>

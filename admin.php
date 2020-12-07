@@ -133,6 +133,42 @@ if(isset($_GET['id'])){
    
   }
 }
+if(isset($_GET['id'])){
+  $m=$_GET['id'];
+  if($m==4 || $m==5||$m==6||$m==7){
+$abc='<div class="select"><center>
+<form action="" method="POST">
+<label for="start">Start date:</label>
+
+ <input type="date" id="start" name="trip-start1"
+     name="date1"
+     min="2018-01-01" max="2022-12-31">
+     <span>To<span>
+<input type="date" id="start2" name="trip-start"
+name="date2"
+       min="2018-01-01" max="2022-12-31">
+       <input type="submit" value="Date" name="submittt" class="submitt">
+</form></center>';
+  
+  echo $abc;
+ 
+
+  }
+}
+if (isset($_POST['submit']) || isset($_POST['submitt']) || isset($_POST['submittt']) ) {
+  require_once('class.php');
+  require_once('config.php');
+   $obj3= new DB();
+   $ab=new user();
+  $filter=isset($_POST['trip-start1'])?$_POST['trip-start1']:'';
+  $filter2=isset($_POST['trip-start'])?$_POST['trip-start']:'';
+ 
+
+    $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Cab-Name</th><th>Laugage</th></tr><tr>";
+     $ab->filterrr3($a,$m,$filter,$filter2,$obj3->conn);
+
+
+}
 
 if (isset($_POST['submit']) ) {
   require_once('class.php');
@@ -143,10 +179,10 @@ if (isset($_POST['submit']) ) {
   if($filter==1 || $filter=='fare'|| $filter=='date'|| $filter=='dist'||$filter=='microo'|| $filter=='minii'|| $filter=='suvv'|| $filter=='royall'){
     $a= "<table><tr><th>Ride_id</th><th>Ride_date</th><th>Pickup</th><th>Drop</th><th>Distance</th><th>Fare</th><th>Laugage</th><th>Cab-type</th></tr><tr>";
     $ab->filterrr($a,$m,$filter,$obj3->conn);
-    echo $filter;
+  
   }
   else{
-echo $filter;
+
   
   $a='<table><tr><th>User_id</th><th>Name</th><th>Contact</th><th>Date </th><th>username</th></tr><tr>';
   $ab->filterrr($a,$m,$filter,$obj3->conn);
@@ -424,7 +460,7 @@ function onlynumber(button) {
          
          
         }
-       else if ((code > 64 && code < 91) || (code < 123 && code > 96)|| (code==08)||(code < 58 && code > 47) && count>4)
+       else if ((code > 64 && code < 91) || (code < 123 && code > 96)|| (code==08)||(code < 58 && code > 47) && count>2)
             return true; 
         return false; 
     } 

@@ -444,10 +444,21 @@ function filterrr2($a,$m,$filter,$filter2,$conn){
           $abc=$row['user_id'];
         }
     }
-  
+  if($m==1){
   $sql="SELECT *
  FROM `ride`
   WHERE (ride_date BETWEEN '".$filter."' AND '".$filter2."' )";
+}
+if($m==2){
+$sql="SELECT *
+FROM `ride`
+WHERE (ride_date BETWEEN '".$filter."' AND '".$filter2."' ) AND `status`='active'";
+}
+if($m==3){
+$sql="SELECT *
+FROM `ride`
+WHERE (ride_date BETWEEN '".$filter."' AND '".$filter2."' ) AND `status`='pending'";
+}
   $result=$conn->query($sql);
   if ($result->num_rows > 0) {
            
@@ -466,7 +477,59 @@ function filterrr2($a,$m,$filter,$filter2,$conn){
 }
 
 }
+function filterrr3($a,$m,$filter,$filter2,$conn){
 
+    $abc='';
+    $name=$_SESSION['userdata']['username'];
+    $sql1="SELECT * FROM users WHERE `username`='".$name."'";
+    
+    $result=$conn->query($sql1);
+    
+    if ($result->num_rows > 0) {
+       
+        while ($row= $result->fetch_assoc()) {
+
+          $abc=$row['user_id'];
+        }
+    }
+  if($m==4){
+  $sql="SELECT *
+ FROM `ride`
+  WHERE (ride_date BETWEEN '".$filter."' AND '".$filter2."' )";
+}
+if($m==5){
+$sql="SELECT *
+FROM `ride`
+WHERE (ride_date BETWEEN '".$filter."' AND '".$filter2."' ) AND `status`='active'";
+}
+if($m==6){
+$sql="SELECT *
+FROM `ride`
+WHERE (ride_date BETWEEN '".$filter."' AND '".$filter2."' ) AND `status`='pending'";
+}
+if($m==7){
+    $sql="SELECT *
+    FROM `ride`
+    WHERE (ride_date BETWEEN '".$filter."' AND '".$filter2."' ) AND `status`='cancelled'";
+    }
+  $result=$conn->query($sql);
+  if ($result->num_rows > 0) {
+           
+    while ($row= $result->fetch_assoc()) {
+        $a.='<td>'.$row['ride_id'].'</td>';
+        $a.='<td>'.$row['ride_date'].'</td>';
+        $a.='<td>'.$row['pickup'].'</td>';
+        $a.='<td>'.$row['drop'].'</td>';
+        $a.='<td>'.$row['total_distance'].'</td>';
+        $a.='<td>'.$row['total_fare'].'</td>';
+        $a.='<td>'.$row['cab_type'].'</td>';
+        $a.='<td>'.$row['laugage'].'</td></tr>';
+    }
+    $a.='</table>';
+    echo $a;
+}
+
+}
 function filterrr($a,$m,$filter,$conn){
     $abc='';
     $name=$_SESSION['userdata']['username'];

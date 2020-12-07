@@ -129,7 +129,7 @@ $obj5=new location();
             <div class="input-group-prepend">
               <span class="input-group-text text_size" id="basic-addon1"  >Luggage</span>
             </div>
-            <input type="text" class="form-control abc3 new" placeholder="Enter Weight In KG"  aria-label="Username" onkeypress="return onlynumber(event)" aria-describedby="basic-addon1">
+            <input type="text" class="form-control abc3 new lugwt" placeholder="Enter Weight In KG"  aria-label="Username" onkeypress="return onlynumber(event)" aria-describedby="basic-addon1">
 
           </div>
          <p class="error" ></p>
@@ -187,6 +187,11 @@ $obj5=new location();
 		</div>
 	</div>
 </div>
+<script>
+   $('.lugwt').on("cut copy paste drag drop",function(e) {
+    e.preventDefault();
+    });
+</script>
   </body>
 
 </html>

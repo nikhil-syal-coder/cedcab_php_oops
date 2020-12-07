@@ -61,22 +61,22 @@ Register
 <center><h2 class="head">Sign Up</h2><br>
 <form action="signup.php" method="POST">
 <p>
-<label for="name">Name: <input type="text" name="name" class="name"   onkeydown="return alphaonly(event);" required></label>
+<label for="name">Name: <input type="text" name="name" class="name lugwt"    onkeydown="return alphaonly(event);" required></label>
 </p>    
 <p>
-<label for="username">Username: <input type="text" name="username" onkeydown="return alphaonly2(event);" class= "user" required></label>
+<label for="username">Username: <input type="text" name="username" onkeydown="return alphaonly2(event);" class= "user lugwt" required></label>
 </p>
 <p>
-<label for="password">Password: <input type="password" name="password" class="pass1" onkeydown="return alphaonly2(event);" required></label>
+<label for="password">Password: <input type="password" name="password" class="pass1 lugwt" onkeydown="return alphaonly2(event);" required></label>
 </p>
 <p>
-<label for="password2">Re-Password: <input type="password" class="pass" name="password2" onkeydown="return alphaonly2(event);"  required></label>
+<label for="password2">Re-Password: <input type="password" class="pass lugwt" name="password2 " onkeydown="return alphaonly2(event);"  required></label>
 </p>
 <p>
-<label for="email">Email: <input type="email" name="email" class="email" required></label>
+<label for="email">Email: <input type="email" name="email" class="email lugwt" required></label>
 </p>
 <p>
-<label for="phone">Mobile No.-: <input type="text" name="phone" class="phone" onkeypress="return onlynumber(event)" required></label>
+<label for="phone">Mobile No.-: <input type="text" name="phone" class="phone lugwt" onkeypress="return onlynumber(event)" required></label>
 </p>
 <p>
 <input type="submit" id="sub" name="submit" class="btn" value="Submit">
@@ -152,6 +152,9 @@ $("input[name=phone]").on("blur", function(e){
           alert("Value must contain 10 characters.");
           $(this).unfocus();
      }
+});
+$('.lugwt').on("cut copy paste drag drop",function(e) {
+e.preventDefault();
 });
    
 </script>
